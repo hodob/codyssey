@@ -1,0 +1,11 @@
+# 실제 API 키가 들어 있는 환경 설정
+.env
+.env.*
+!.env.example
+
+# Python 로컬 환경과 캐시
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.test-runtime*/

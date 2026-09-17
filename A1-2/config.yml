@@ -1,0 +1,17 @@
+# 실행: python main.py -date "2026-10-15"
+# API 키는 직접 적지 않고 ${환경변수명}으로 참조합니다.
+
+llm:
+  base_url: "https://api.groq.com/openai/v1"
+  api_key: "${LLM_API_KEY}"
+  model: "openai/gpt-oss-120b"
+  max_tokens: 4096
+  timeout_seconds: 120
+
+places:
+  provider: "kakao"
+  base_url: "https://dapi.kakao.com/v2/local"
+  api_key: "${KAKAO_API_KEY}"
+  category_group_code: "FD6"
+  limit: 5
+  timeout_seconds: 30
