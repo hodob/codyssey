@@ -1,0 +1,362 @@
+{
+  "raw_sha256": "bcb4a091bec2d14516b1a9ad1c109048952f220239ab17e1dd2d52edff94a728",
+  "method_details": {
+    "start_year": 1959,
+    "end_year": 2019,
+    "monthly_n": 732,
+    "filling": "linear",
+    "filled_months": [
+      "1964-02",
+      "1964-03",
+      "1964-04"
+    ],
+    "polynomial_degree": 3,
+    "harmonics": 4,
+    "polynomial_center_decimal_year": 1989.4974878415303,
+    "polynomial_scale_years": 10,
+    "joint_coefficients": [
+      351.18783951234394,
+      15.556717521506803,
+      1.3060132620192126,
+      0.04160506463933219,
+      2.67899528737068,
+      -1.006649791439239,
+      -0.4608626627305326,
+      0.6623422624084239,
+      -0.0829748457236619,
+      0.05581745011507127,
+      0.05065674433908973,
+      -0.0642960912134207
+    ],
+    "filter_order": 2,
+    "filter_cutoff_period_days": [
+      540.0,
+      90.0
+    ],
+    "sample_frequency_per_year": 12,
+    "days_per_year": 365.25,
+    "filter_implementation": "SciPy butter SOS + sosfiltfilt",
+    "filter_padding": {
+      "type": "odd",
+      "length_months": 36
+    },
+    "sos_coefficients": [
+      [
+        0.3540004526024521,
+        0.7080009052049042,
+        0.3540004526024521,
+        1.0,
+        0.5974288401843023,
+        0.2910807391824682
+      ],
+      [
+        1.0,
+        -2.0,
+        1.0,
+        1.0,
+        -1.5044400177331434,
+        0.622938232281394
+      ]
+    ]
+  },
+  "main_gls": {
+    "start_year": 1959,
+    "end_year": 2019,
+    "n": 61,
+    "slope_ppm_per_decade": 0.2166656248911661,
+    "slope_standard_error": 0.03372778690071093,
+    "slope_ci95": [
+      0.1491764791896975,
+      0.28415477059263466
+    ],
+    "intercept_at_start_ppm": 5.807867004260874,
+    "rho_ar1": 0.2353811455247612,
+    "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+  },
+  "paper_reference": {
+    "period": [
+      1959,
+      2019
+    ],
+    "trend_ppm_per_decade": 0.22,
+    "reported_plus_minus": 0.034,
+    "doi": "10.1029/2021JD035892"
+  },
+  "early_vs_late": {
+    "early_years": [
+      1959,
+      1968
+    ],
+    "late_years": [
+      2010,
+      2019
+    ],
+    "early_mean_amplitude_ppm": 5.909616161140606,
+    "late_mean_amplitude_ppm": 7.079210048935943,
+    "difference_ppm": 1.1695938877953367,
+    "relative_change_percent": 19.791368100793783
+  },
+  "ols_hac_crosscheck": {
+    "slope_ppm_per_decade": 0.2135691519340496,
+    "slope_ci95": [
+      0.1508608072310586,
+      0.2762774966370406
+    ],
+    "hac_lags": 3
+  },
+  "sensitivity": [
+    {
+      "scenario": "filter_order_1",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.18931398661568496,
+      "slope_standard_error": 0.02908099848976253,
+      "slope_ci95": [
+        0.13112304304747827,
+        0.24750493018389166
+      ],
+      "intercept_at_start_ppm": 5.8848308333647115,
+      "rho_ar1": 0.18479758888871226,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "filter_order_2",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.2166656248911661,
+      "slope_standard_error": 0.03372778690071093,
+      "slope_ci95": [
+        0.1491764791896975,
+        0.28415477059263466
+      ],
+      "intercept_at_start_ppm": 5.807867004260874,
+      "rho_ar1": 0.2353811455247612,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "filter_order_3",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.22810010598666602,
+      "slope_standard_error": 0.03589247629109918,
+      "slope_ci95": [
+        0.15627942682003387,
+        0.2999207851532982
+      ],
+      "intercept_at_start_ppm": 5.775862712521931,
+      "rho_ar1": 0.2642175144224566,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "filter_order_4",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.23254107911355656,
+      "slope_standard_error": 0.03683838345491275,
+      "slope_ci95": [
+        0.15882764408403288,
+        0.30625451414308025
+      ],
+      "intercept_at_start_ppm": 5.763933498236962,
+      "rho_ar1": 0.2757780692147212,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "filter_order_5",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.23459680724691173,
+      "slope_standard_error": 0.03726597978149892,
+      "slope_ci95": [
+        0.1600277539442016,
+        0.30916586054962186
+      ],
+      "intercept_at_start_ppm": 5.758970181492906,
+      "rho_ar1": 0.28016425917475357,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "filter_order_6",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.23555207181512008,
+      "slope_standard_error": 0.03749891480823435,
+      "slope_ci95": [
+        0.16051691660051748,
+        0.3105872270297227
+      ],
+      "intercept_at_start_ppm": 5.756852987956573,
+      "rho_ar1": 0.28265117577230925,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "padding_12_months",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.21688417916559635,
+      "slope_standard_error": 0.033722530142930696,
+      "slope_ci95": [
+        0.14940555221214977,
+        0.28436280611904297
+      ],
+      "intercept_at_start_ppm": 5.807367813312595,
+      "rho_ar1": 0.2348606953752046,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "padding_72_months",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.2166659415290909,
+      "slope_standard_error": 0.03372777741557848,
+      "slope_ci95": [
+        0.14917681480732853,
+        0.2841550682508533
+      ],
+      "intercept_at_start_ppm": 5.80786655575918,
+      "rho_ar1": 0.23538042686297053,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "provider_fill_instead_of_linear",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 61,
+      "slope_ppm_per_decade": 0.21566745329178508,
+      "slope_standard_error": 0.03367068477948952,
+      "slope_ci95": [
+        0.14829256867095958,
+        0.2830423379126106
+      ],
+      "intercept_at_start_ppm": 5.811681530329827,
+      "rho_ar1": 0.23740043590344131,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "drop_boundary_years",
+      "start_year": 1960,
+      "end_year": 2018,
+      "n": 59,
+      "slope_ppm_per_decade": 0.19677833220561977,
+      "slope_standard_error": 0.03768386648326171,
+      "slope_ci95": [
+        0.12131769120035413,
+        0.2722389732108854
+      ],
+      "intercept_at_start_ppm": 5.8927831736638545,
+      "rho_ar1": 0.2910965191127457,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "drop_interpolated_year_1964",
+      "start_year": 1959,
+      "end_year": 2019,
+      "n": 60,
+      "slope_ppm_per_decade": 0.2124735456837797,
+      "slope_standard_error": 0.03398936469753247,
+      "slope_ci95": [
+        0.14443644009374013,
+        0.2805106512738193
+      ],
+      "intercept_at_start_ppm": 5.825709961682529,
+      "rho_ar1": 0.23311603653898855,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    },
+    {
+      "scenario": "recent_paper_subperiod",
+      "start_year": 1986,
+      "end_year": 2019,
+      "n": 34,
+      "slope_ppm_per_decade": 0.19289438670669207,
+      "slope_standard_error": 0.09603200189301708,
+      "slope_ci95": [
+        -0.0027163999884180223,
+        0.38850517340180213
+      ],
+      "intercept_at_start_ppm": 6.421688967178606,
+      "rho_ar1": 0.3476712632684561,
+      "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+    }
+  ],
+  "extended_method_details": {
+    "start_year": 1959,
+    "end_year": 2025,
+    "monthly_n": 804,
+    "filling": "linear",
+    "filled_months": [
+      "1964-02",
+      "1964-03",
+      "1964-04"
+    ],
+    "polynomial_degree": 3,
+    "harmonics": 4,
+    "polynomial_center_decimal_year": 1992.4974951492538,
+    "polynomial_scale_years": 10,
+    "joint_coefficients": [
+      355.9313906538003,
+      16.303969795963564,
+      1.3664130799615004,
+      0.054064207522090145,
+      2.694093108342353,
+      -0.9948868691167504,
+      -0.4679527278062311,
+      0.6700944152025322,
+      -0.06837781697910417,
+      0.04934335923295119,
+      0.051255587284445826,
+      -0.06687140421530141
+    ],
+    "filter_order": 2,
+    "filter_cutoff_period_days": [
+      540.0,
+      90.0
+    ],
+    "sample_frequency_per_year": 12,
+    "days_per_year": 365.25,
+    "filter_implementation": "SciPy butter SOS + sosfiltfilt",
+    "filter_padding": {
+      "type": "odd",
+      "length_months": 36
+    },
+    "sos_coefficients": [
+      [
+        0.3540004526024521,
+        0.7080009052049042,
+        0.3540004526024521,
+        1.0,
+        0.5974288401843023,
+        0.2910807391824682
+      ],
+      [
+        1.0,
+        -2.0,
+        1.0,
+        1.0,
+        -1.5044400177331434,
+        0.622938232281394
+      ]
+    ]
+  },
+  "extended_gls_1959_2025": {
+    "start_year": 1959,
+    "end_year": 2025,
+    "n": 67,
+    "slope_ppm_per_decade": 0.18088146552236692,
+    "slope_standard_error": 0.030751331712577636,
+    "slope_ci95": [
+      0.11946681522564093,
+      0.2422961158190929
+    ],
+    "intercept_at_start_ppm": 5.88405841862262,
+    "rho_ar1": 0.2565666758656053,
+    "method": "GLS, correlation=rho^calendar-year-distance, rho estimated by REML; t CI with n-2 df"
+  }
+}

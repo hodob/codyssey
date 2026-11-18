@@ -1,0 +1,169 @@
+{
+  "raw_sha256": "bcb4a091bec2d14516b1a9ad1c109048952f220239ab17e1dd2d52edff94a728",
+  "main_column": "co2_filled",
+  "annual_mean_years": [
+    1959,
+    2025
+  ],
+  "annual_growth_years": [
+    1960,
+    2025
+  ],
+  "main_period_provider_filled_months": [
+    "1964-02",
+    "1964-03",
+    "1964-04"
+  ],
+  "comparison_1960s_vs_2015_2024": {
+    "early_mean_ppm_per_year": 0.8641666666666709,
+    "recent_mean_ppm_per_year": 2.564250000000004,
+    "difference_ppm_per_year": 1.7000833333333332,
+    "ratio": 2.9673095467695174
+  },
+  "main_trend": {
+    "start_year": 1960,
+    "end_year": 2025,
+    "n": 66,
+    "column": "growth_ppm",
+    "hac_lags": 3,
+    "slope_ppm_per_year2": 0.029245433670806786,
+    "slope_ci95": [
+      0.025457609867334162,
+      0.03303325747427941
+    ],
+    "intercept_at_start_ppm_per_year": 0.7320865370119123,
+    "r_squared": 0.6183128487375151,
+    "residual_lag1_correlation": -0.026817559791749095,
+    "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+  },
+  "trend_sensitivity": [
+    {
+      "start_year": 1960,
+      "end_year": 2025,
+      "n": 66,
+      "column": "growth_ppm",
+      "hac_lags": 1,
+      "slope_ppm_per_year2": 0.029245433670806786,
+      "slope_ci95": [
+        0.02421247278753589,
+        0.03427839455407768
+      ],
+      "intercept_at_start_ppm_per_year": 0.7320865370119123,
+      "r_squared": 0.6183128487375151,
+      "residual_lag1_correlation": -0.026817559791749095,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1960,
+      "end_year": 2025,
+      "n": 66,
+      "column": "growth_ppm",
+      "hac_lags": 3,
+      "slope_ppm_per_year2": 0.029245433670806786,
+      "slope_ci95": [
+        0.025457609867334162,
+        0.03303325747427941
+      ],
+      "intercept_at_start_ppm_per_year": 0.7320865370119123,
+      "r_squared": 0.6183128487375151,
+      "residual_lag1_correlation": -0.026817559791749095,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1960,
+      "end_year": 2025,
+      "n": 66,
+      "column": "growth_ppm",
+      "hac_lags": 5,
+      "slope_ppm_per_year2": 0.029245433670806786,
+      "slope_ci95": [
+        0.02571693059388109,
+        0.032773936747732484
+      ],
+      "intercept_at_start_ppm_per_year": 0.7320865370119123,
+      "r_squared": 0.6183128487375151,
+      "residual_lag1_correlation": -0.026817559791749095,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1960,
+      "end_year": 2025,
+      "n": 66,
+      "column": "growth_ppm",
+      "hac_lags": 10,
+      "slope_ppm_per_year2": 0.029245433670806786,
+      "slope_ci95": [
+        0.02634536120506829,
+        0.032145506136545286
+      ],
+      "intercept_at_start_ppm_per_year": 0.7320865370119123,
+      "r_squared": 0.6183128487375151,
+      "residual_lag1_correlation": -0.026817559791749095,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1960,
+      "end_year": 2024,
+      "n": 65,
+      "column": "growth_ppm",
+      "hac_lags": 3,
+      "slope_ppm_per_year2": 0.029175298659673665,
+      "slope_ci95": [
+        0.0252541554632852,
+        0.03309644185606213
+      ],
+      "intercept_at_start_ppm_per_year": 0.7335827505827521,
+      "r_squared": 0.6063464777261746,
+      "residual_lag1_correlation": -0.03225532182514821,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1970,
+      "end_year": 2025,
+      "n": 56,
+      "column": "growth_ppm",
+      "hac_lags": 3,
+      "slope_ppm_per_year2": 0.029116683754841735,
+      "slope_ci95": [
+        0.023744927020128634,
+        0.034488440489554836
+      ],
+      "intercept_at_start_ppm_per_year": 1.0279965538847102,
+      "r_squared": 0.514004150239998,
+      "residual_lag1_correlation": -0.018503328530663925,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1980,
+      "end_year": 2025,
+      "n": 46,
+      "column": "growth_ppm",
+      "hac_lags": 3,
+      "slope_ppm_per_year2": 0.03109517936067442,
+      "slope_ci95": [
+        0.02248248208282952,
+        0.039707876638519324
+      ],
+      "intercept_at_start_ppm_per_year": 1.2605396238051163,
+      "r_squared": 0.45369677689761334,
+      "residual_lag1_correlation": 0.00040397374523666574,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    },
+    {
+      "start_year": 1966,
+      "end_year": 2025,
+      "n": 60,
+      "column": "observed_growth_ppm",
+      "hac_lags": 3,
+      "slope_ppm_per_year2": 0.02794121052144123,
+      "slope_ci95": [
+        0.0235580571830499,
+        0.03232436385983256
+      ],
+      "intercept_at_start_ppm_per_year": 0.9589426229508181,
+      "r_squared": 0.5347526751374251,
+      "residual_lag1_correlation": -0.02584382598964341,
+      "inference": "OLS; Bartlett Newey-West HAC; n/(n-k) correction; t interval, df=n-k"
+    }
+  ]
+}

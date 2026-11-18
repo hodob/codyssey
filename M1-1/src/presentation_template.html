@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Scripps 마우나로아 CO₂ 시계열의 장기 증가 속도, 계절 진폭, 2024년 연간 증가량 분석. 15장 발표 자료.">
+<meta name="data-sha256" content="$RAW_SHA">
+<title>마우나로아 CO₂ 농도의 장기 추세와 변동</title>
+<style>
+:root{--paper:#f4f2eb;--white:#fffefa;--ink:#16383e;--muted:#637478;--line:#dce2dc;--teal:#19788a;--rust:#b6502e;--lime:#d9ec79;--radius:18px;font-family:"Pretendard","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+*{box-sizing:border-box}body{margin:0}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:4px}a{color:var(--teal);text-underline-offset:4px}button:disabled{opacity:.28;cursor:default}.masthead{height:60px;width:100%;gap:20px;max-width:1510px;margin:auto;padding:0 30px;display:flex;align-items:center;justify-content:space-between;font-size:12px;letter-spacing:.13em}.brand{font-weight:800;display:flex;align-items:center;gap:11px}.brand:before{content:"";width:10px;height:10px;background:var(--teal);border-radius:50%}.masthead .topic{color:var(--muted);letter-spacing:.02em}.deck{max-width:1440px;margin:0 auto}.slide{background:var(--white);padding:45px;position:relative;overflow:hidden;min-height:650px;margin-bottom:20px;display:flex;flex-direction:column;container-type:inline-size}.slide[hidden]{display:none!important}.slide{word-break:keep-all;overflow-wrap:break-word}.presenting{height:100dvh;overflow:hidden;display:flex;flex-direction:column}.presenting .deck{width:min(calc(100vw - 56px),calc((100dvh - 138px) * 16 / 9));aspect-ratio:16/9;position:relative;flex:none;border:1px solid #e2e5dc;border-radius:8px;box-shadow:0 12px 45px #18383e0b;container-type:inline-size}.presenting .slide{position:absolute;inset:0;min-height:0;margin:0;padding:3.6cqw 4cqw 2.8cqw;container-type:normal;border-radius:7px}.presenting main{flex:1;display:grid;place-items:center;min-height:0}.eyebrow{font-size:1.04cqw;letter-spacing:.12em;font-weight:800;text-transform:uppercase;display:flex;align-items:center;gap:.8cqw;margin:0 0 1cqw}.eyebrow:before{content:"";height:1px;width:2cqw;background:currentColor}.eyebrow.rust{color:var(--rust)}.eyebrow.teal{color:var(--teal)}h1,h2,h3,p{margin:0}h1{font-size:5.8cqw;line-height:1.14;letter-spacing:-.065em;font-weight:850}h2{font-size:3.05cqw;line-height:1.25;letter-spacing:-.045em;font-weight:800}h3{font-size:1.7cqw;line-height:1.4;letter-spacing:-.025em}.lead{font-size:1.6cqw;line-height:1.65;letter-spacing:-.02em;color:var(--muted)}.body-copy{font-size:1.46cqw;line-height:1.75;letter-spacing:-.015em}.small{font-size:1.1cqw;line-height:1.65;color:var(--muted)}.micro{font-size:.92cqw;line-height:1.65;color:var(--muted)}.accent{color:var(--rust)}.teal-text{color:var(--teal)}.lime-text{color:var(--lime)}.content{flex:1;min-height:0;display:flex;flex-direction:column;gap:1.3cqw;margin-top:1.7cqw}.columns{display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw;min-height:0}.columns.wide-chart{grid-template-columns:minmax(0,2.8fr) minmax(0,1fr);gap:1.7cqw}.columns .stack{display:flex;flex-direction:column;gap:1.3cqw}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3cqw}.card{border:1px solid var(--line);border-radius:var(--radius);padding:1.7cqw;background:#fff}.card.soft{background:#edf4f1;border-color:transparent}.card.dark{background:var(--ink);color:var(--white);border-color:var(--ink)}.card.dark .small,.card.dark .micro{color:#c0d4d1}.card-index{font-size:1cqw;letter-spacing:.12em;color:var(--muted);margin-bottom:1.5cqw}.metric{font-variant-numeric:tabular-nums;font-size:3.9cqw;line-height:1.1;font-weight:800;letter-spacing:-.06em}.metric.medium{font-size:3.1cqw}.metric small{font-size:1.2cqw;letter-spacing:0;font-weight:500;margin-left:.4cqw}.pill{display:inline-flex;align-items:center;gap:.5cqw;border:1px solid var(--line);border-radius:100px;padding:.45cqw .85cqw;font-size:1.02cqw;line-height:1.25;background:#fff}.pill.tint{border:none;background:#edf3ed}.pill.light{background:#ffffff14;color:var(--white);border-color:#ffffff30}.ribbon{display:flex;justify-content:space-between;align-items:center;gap:1.2cqw;padding:1.1cqw 1.5cqw;border-radius:10px;background:#edf3ed}.ribbon strong{font-size:1.5cqw}.ribbon .micro{font-size:1.02cqw}.takeaway{background:var(--ink);color:#fff;border-radius:12px;padding:1.4cqw 1.7cqw;font-size:1.75cqw;font-weight:700;line-height:1.45;letter-spacing:-.03em}.takeaway.light{background:var(--lime);color:var(--ink)}.foot{display:flex;justify-content:space-between;align-items:center;gap:1cqw;margin-top:auto;padding-top:1.1cqw;color:var(--muted);font-size:.86cqw;letter-spacing:.01em;line-height:1.45}.foot .tag{white-space:nowrap;font-weight:700;letter-spacing:.06em}.chart{background:white;border:1px solid var(--line);border-radius:12px;padding:.5cqw;margin:0;min-height:0;display:flex;align-items:center;justify-content:center;flex:1;overflow:hidden}.chart img{max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;display:block}.chart.large{flex:1}.chart figcaption{display:none}.grow{flex:1;min-height:0}.rule{height:1px;background:var(--line);margin:1.1cqw 0}.clean-list{padding:0;margin:0;list-style:none;display:flex;flex-direction:column;gap:.9cqw}.clean-list li{position:relative;padding-left:1.2cqw;font-size:1.4cqw;line-height:1.65}.clean-list li:before{content:"";width:.35cqw;height:.35cqw;border-radius:50%;background:var(--teal);position:absolute;top:.7cqw;left:0}.formula{font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;font-size:1.24cqw;background:#edf3ed;border-radius:8px;padding:1cqw 1.2cqw;line-height:1.7}.two-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1.5cqw}.label{font-size:1.05cqw;color:var(--muted);margin-bottom:.5cqw}.callout{border-left:3px solid var(--rust);padding:.2cqw 0 .2cqw 1.2cqw}.callout h3{margin-bottom:.5cqw}.flow{display:flex;align-items:center;gap:.9cqw}.flow .node{flex:1;text-align:center;padding:1.5cqw 1cqw;border:1px solid var(--line);border-radius:12px;font-size:1.4cqw;line-height:1.6;background:#fff}.flow .arrow{color:var(--teal);font-size:2cqw}.table{width:100%;border-collapse:collapse;font-size:1.3cqw;line-height:1.55}.table th{text-align:left;font-weight:600;color:var(--muted);font-size:1.04cqw;padding:.8cqw 1cqw;border-bottom:1px solid var(--line)}.table td{padding:1.1cqw 1cqw;border-bottom:1px solid var(--line)}.table .num{font-variant-numeric:tabular-nums;text-align:right}.table tr.emphasis td{background:#edf3ed;font-weight:750}.link-list{display:flex;flex-direction:column;gap:1.1cqw}.link-list a{display:block;padding:1.05cqw 1.25cqw;border:1px solid var(--line);border-radius:10px;text-decoration:none;background:#fff;font-size:1.26cqw;line-height:1.45}.link-list a span{display:block;color:var(--muted);font-size:.95cqw;margin-top:.35cqw}.cover{background:var(--ink);color:var(--white)}.cover .eyebrow,.cover .lead{color:#b8d0cb}.cover .content{display:grid;grid-template-columns:1.04fr 1fr;gap:3cqw;margin-top:.8cqw;align-items:center}.cover .foot{color:#aac6bf}.cover-visual{align-self:stretch;position:relative;border:1px solid #ffffff24;border-radius:18px;background:linear-gradient(140deg,#ffffff06,#ffffff00);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:1.3cqw}.cover-visual .visual-label{position:absolute;left:1.5cqw;top:1.4cqw;font-size:.94cqw;color:#a8c6bf;letter-spacing:.08em}.cover-visual svg{width:100%;height:auto;max-height:32cqw}.cover-caption{position:absolute;left:1.5cqw;top:3.5cqw}.cover-caption .metric{font-size:4.5cqw}.cover-caption .small{color:#a8c6bf}.scale-card{display:flex;flex-direction:column;gap:1.1cqw;min-height:21cqw}.scale-card svg{width:100%;height:6cqw;margin-top:auto}.scale-card h3{font-size:2cqw}.scale-card p{font-size:1.3cqw;line-height:1.7;color:var(--muted)}.cycle-symbol{height:6cqw;display:flex;align-items:center;justify-content:center;font-size:3.6cqw;font-weight:700;color:var(--teal)}.definition{padding:1.5cqw 1.6cqw;border-radius:12px;border:1px solid var(--line);background:white;display:flex;flex-direction:column;gap:.9cqw}.definition .symbol{font-size:2.5cqw;font-weight:800;letter-spacing:-.06em}.summary-row{display:grid;grid-template-columns:3.6cqw 1.05fr 1.5fr;gap:1.6cqw;padding:1.5cqw 0;border-bottom:1px solid var(--line);align-items:start}.summary-row .n{font-size:1.1cqw;padding-top:.3cqw;color:var(--muted)}.summary-row strong{font-size:1.9cqw;letter-spacing:-.04em;line-height:1.4}.summary-row p{font-size:1.45cqw;line-height:1.7}.summary-row:first-child{padding-top:.3cqw}.controls{display:none;max-width:1440px;width:100%;margin:auto;min-height:68px;align-items:center;justify-content:space-between;padding:8px 30px;gap:15px}.presenting .controls{display:flex}.control-group{display:flex;align-items:center;gap:6px}.control{border:1px solid transparent;background:transparent;color:var(--ink);border-radius:8px;padding:8px 10px;min-height:36px;font-size:12px;letter-spacing:.01em}.control:hover:not(:disabled){background:#e5eadd}.control.nav{border-color:#d7dfd6;font-size:18px;min-width:38px}.counter{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:55px;text-align:center}.hint{font-size:11px;color:var(--muted)}.progress{position:fixed;left:0;right:0;bottom:0;height:3px;background:#e3e8de;z-index:10}.progress span{display:block;height:100%;background:var(--teal);width:0;transition:width .2s ease}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}dialog{max-width:860px;width:calc(100vw - 40px);max-height:85dvh;border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--white);color:var(--ink)}dialog::backdrop{background:#102c34aa;backdrop-filter:blur(4px)}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.dialog-head h2{font-size:22px}.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.toc-grid button{text-align:left;padding:14px;border:1px solid var(--line);background:white;border-radius:9px;line-height:1.45;color:var(--ink);font-size:13px}.toc-grid button:hover,.toc-grid button[aria-current=true]{background:#eaf1e4;border-color:#b9cdb1}.toc-grid .toc-n{font-size:11px;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:6px}.speaker-note{font-size:14px;line-height:1.9;white-space:pre-line;word-break:keep-all;overflow-wrap:break-word}.speaker-note p{margin-bottom:12px}.speaker-note strong{color:var(--teal)}.notes-only{display:none}noscript p{padding:16px;text-align:center}.fullscreen-message{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;border-radius:8px;padding:10px 18px;font-size:13px;z-index:30}.reader{overflow:auto;height:auto}.reader main{display:block}.reader .deck{width:min(1440px,calc(100vw - 40px));display:block;aspect-ratio:auto;border:0;box-shadow:none;container-type:inline-size}.reader .slide{position:relative!important;inset:auto;aspect-ratio:16/9;min-height:0;margin-bottom:24px;display:flex!important}.reader .slide[hidden]{display:flex!important}.reader .controls{position:sticky;bottom:0;background:var(--paper)}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media(max-width:900px){.masthead{height:46px;padding:0 16px;font-size:10px}.masthead .topic{max-width:53%;text-align:right;font-size:10px}.presenting{height:auto;min-height:100dvh;overflow:auto}.presenting main{display:block}.presenting .deck{width:calc(100vw - 20px);aspect-ratio:auto;margin:10px auto;min-height:calc(100dvh - 135px);container-type:inline-size}.presenting .slide{position:relative;inset:auto;min-height:calc(100dvh - 135px);padding:25px 22px}.eyebrow{font-size:11px;gap:8px;margin-bottom:13px}.eyebrow:before{width:22px}h1{font-size:clamp(44px,12vw,66px)}h2{font-size:28px}h3{font-size:19px}.lead{font-size:16px}.body-copy{font-size:15px}.small{font-size:13px}.micro{font-size:11px}.content{gap:18px;margin-top:20px}.columns,.columns.wide-chart{grid-template-columns:1fr;gap:18px}.cards{grid-template-columns:1fr;gap:12px}.card{padding:18px;border-radius:12px}.card-index{font-size:11px;margin-bottom:10px}.metric{font-size:46px}.metric.medium{font-size:38px}.metric small{font-size:14px}.pill{font-size:11px;padding:6px 10px}.ribbon{padding:14px;gap:12px;flex-wrap:wrap}.ribbon strong{font-size:17px}.ribbon .micro{font-size:11px}.takeaway{font-size:20px;padding:17px}.chart{min-height:210px;padding:4px;flex:none}.chart img{height:auto;max-height:320px}.foot{font-size:10px;padding-top:22px;gap:10px}.foot .tag{display:none}.label{font-size:12px}.clean-list{gap:12px}.clean-list li{font-size:15px;padding-left:15px}.clean-list li:before{width:4px;height:4px;top:10px}.formula{font-size:12px;padding:12px;overflow-wrap:anywhere}.callout{padding-left:14px}.callout h3{margin-bottom:8px}.two-metrics{gap:14px}.flow{gap:8px}.flow .node{font-size:13px;padding:16px 9px}.flow .arrow{font-size:22px}.table{font-size:13px}.table td{padding:12px 7px}.table th{font-size:11px;padding:9px 7px}.cover .content{display:flex;gap:24px;align-items:stretch}.cover-visual{height:265px;flex:none;padding:12px}.cover-visual svg{max-height:245px}.cover-visual .visual-label{font-size:10px;top:14px;left:14px}.cover-caption{left:14px;top:40px}.cover-caption .metric{font-size:44px}.scale-card{min-height:0;gap:10px}.scale-card h3{font-size:22px}.scale-card p{font-size:14px}.scale-card svg{height:55px}.cycle-symbol{height:55px;font-size:35px}.definition{padding:18px;gap:12px}.definition .symbol{font-size:28px}.summary-row{grid-template-columns:25px 1fr;gap:10px;padding:18px 0}.summary-row .n{font-size:12px}.summary-row strong{font-size:22px}.summary-row p{grid-column:2;font-size:15px}.link-list{gap:10px}.link-list a{padding:13px;font-size:14px}.link-list a span{font-size:11px;margin-top:5px}.controls{padding:10px 12px;background:var(--paper);z-index:9;min-height:60px;flex-wrap:wrap;justify-content:center;gap:8px}.presenting .controls{position:static}.controls .control-group{flex-shrink:0}.controls .control{white-space:nowrap}.hint{display:none}.control{font-size:11px;padding:8px}.toc-grid{grid-template-columns:1fr}.reader .slide{aspect-ratio:auto;min-height:650px}.reader .deck{width:calc(100vw - 20px)}}
+@media print{@page{size:16in 9in;margin:0}:root{background:white}body,body.presenting,body.reader{height:auto!important;overflow:visible!important;display:block!important}.masthead,.controls,.progress,dialog,.fullscreen-message,.sr-only{display:none!important}main,body.presenting main{display:block!important}.deck,body.presenting .deck,body.reader .deck{width:100%!important;max-width:none!important;height:auto!important;aspect-ratio:auto!important;border:0!important;box-shadow:none!important;margin:0!important;display:block!important;container-type:inline-size}.slide,body.presenting .slide,body.reader .slide,.slide[hidden]{display:flex!important;position:relative!important;inset:auto!important;width:100%;height:calc(100vh - 1px);min-height:0!important;aspect-ratio:auto!important;break-after:page;page-break-after:always;margin:0!important;padding:3.6cqw 4cqw 2.8cqw!important;border:0!important;border-radius:0!important;overflow:hidden!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.slide:last-child{break-after:auto;page-break-after:auto}}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="brand">CO₂ / A SINGLE RECORD</div><div class="topic" id="topic">장기 축적 · 계절 교환 · 연도별 변동</div></header>
+<noscript><p>JavaScript가 꺼져 있어 전체 슬라이드를 문서 형태로 표시합니다.</p></noscript>
+<main id="main"><div class="deck" id="deck">
+
+<section class="slide cover" data-title="마우나로아 CO₂ 농도의 추세와 변동" data-topic="OVERVIEW" aria-labelledby="s1">
+<p class="eyebrow">CO₂ TIME SERIES / 1959–2025</p>
+<div class="content"><div><h1 id="s1">마우나로아<br>CO₂ 농도<br><span class="lime-text">추세와 변동</span></h1><p class="lead" style="margin-top:1.8cqw">1959~2025년 월별 관측자료를 이용한<br>시계열 분석</p><div style="margin-top:1.6cqw"><span class="pill light">Scripps 마우나로아 월별 CO₂</span></div></div><div class="cover-visual"><div class="visual-label">OBSERVED RECORD / ANNUAL MEAN</div><div class="cover-caption"><div class="metric">$LEVEL_2025_SHORT<small>ppm</small></div><p class="small">2025년 연평균 농도</p></div><svg viewBox="0 0 640 430" role="img" aria-label="실제 연평균 농도에 기반한 1959~2025년 상승 곡선"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ec79" stop-opacity=".2"/><stop offset="1" stop-color="#d9ec79" stop-opacity="0"/></linearGradient></defs><path d="M48 120H590 M48 210H590 M48 300H590" stroke="#ffffff16" fill="none"/><path d="$COVER_PATH L586,370 L48,370Z" fill="url(#area)"/><path d="$COVER_PATH" fill="none" stroke="#d9ec79" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="586" cy="84" r="6" fill="#d9ec79"/><text x="48" y="405" fill="#b8d0cb" font-size="17">1959</text><text x="542" y="405" fill="#b8d0cb" font-size="17">2025</text></svg></div></div>
+<footer class="foot"><span>자료: Scripps CO₂ Program, UC San Diego</span><span class="tag">RESEARCH PRESENTATION</span></footer>
+<aside class="notes-only">안녕하세요. 마우나로아의 월별 CO₂ 자료를 이용한 시계열 분석 결과를 발표하겠습니다.
+
+이번 분석에서는 장기적인 증가 속도, 계절에 따른 변동폭, 그리고 2024년의 연간 증가량을 살펴봤습니다. 오른쪽은 1959년부터 2025년까지의 연평균 농도입니다.
+
+농도가 지속적으로 높아지는 가운데, 증가 속도와 계절 변동에는 어떤 변화가 있었는지 설명드리겠습니다.</aside>
+</section>
+
+<section class="slide" data-title="분석 질문과 주요 지표" data-topic="OVERVIEW" aria-labelledby="s2">
+<p class="eyebrow">READING THE CURVE</p><h2 id="s2">분석 질문과 주요 지표</h2>
+<div class="content"><div class="cards grow"><article class="card scale-card"><div class="card-index">01 / DECADES</div><h3>장기 축적</h3><p>CO₂ 농도의 증가 속도는<br>장기적으로 얼마나 달라졌는가?</p><svg viewBox="0 0 240 65" aria-hidden="true"><path d="M5 58Q110 55 235 6" fill="none" stroke="#19788a" stroke-width="3"/></svg><span class="pill tint">증가 속도 · ppm/년</span></article><article class="card scale-card"><div class="card-index">02 / SEASONS</div><h3>계절 변동</h3><p>매년 반복되는 농도 변동의 폭은<br>장기적으로 커졌는가?</p><svg viewBox="0 0 240 65" aria-hidden="true"><path d="M0 34Q20 8 40 34T80 34T120 34T160 34T200 34T240 34" fill="none" stroke="#19788a" stroke-width="3"/></svg><span class="pill tint">계절 진폭 · ppm</span></article><article class="card scale-card"><div class="card-index">03 / INDIVIDUAL YEARS</div><h3>연도별 변동</h3><p>2024년 증가량은<br>과거 기록에서 얼마나 큰가?</p><svg viewBox="0 0 240 65" aria-hidden="true"><path d="M15 60V36M50 60V25M85 60V34M120 60V17M155 60V30M190 60V3M225 60V21" stroke="#b6502e" stroke-width="12"/></svg><span class="pill tint">연간 증가량 · ppm</span></article></div></div>
+<footer class="foot"><span>세 질문에 같은 시계열(마우나로아 월별 CO₂)을 사용</span><span class="tag">THREE QUESTIONS</span></footer>
+<aside class="notes-only">분석 질문은 세 가지입니다. 첫째, 연간 증가 속도가 초기와 최근에 얼마나 달라졌는지 비교했습니다.
+
+둘째, 매년 반복되는 계절 변동의 폭이 커졌는지 확인했습니다. 셋째, 2024년 증가량이 과거 기록에서 어느 정도로 큰지 살펴봤습니다.
+
+이 세 결과를 바탕으로 각각의 변화가 탄소순환에서 어떤 의미를 갖는지 설명하겠습니다.</aside>
+</section>
+
+<section class="slide" data-title="분석 자료와 기간" data-topic="DATA" aria-labelledby="s3">
+<p class="eyebrow">ONE DATASET</p><h2 id="s3">분석 자료와 기간</h2>
+<div class="content"><div class="cards grow" style="align-items:stretch"><article class="card soft" style="display:flex;flex-direction:column;justify-content:center;gap:1cqw"><p class="small">원본의 유효 관측값</p><div class="metric medium">$OBSERVED_N<small>개</small></div><p class="body-copy">1958.03–2026.09 월별 관측</p></article><article class="card" style="display:flex;flex-direction:column;justify-content:center;gap:1cqw"><p class="small">주 분석 (1959–2025년)</p><div class="metric medium">$MAIN_MONTHS<small>개월</small></div><p class="body-copy">관측 $MAIN_OBSERVED개월 + 보충 $MAIN_FILLED개월</p></article><article class="card" style="display:flex;flex-direction:column;justify-content:center;gap:1cqw"><p class="small">기간·보충 기준</p><p class="body-copy">계절 진폭 비교: 1959–2019년<br>2026년: 불완전해 연간 비교에서 제외<br>1964년 2–4월: 결측 보충<br>2022.12–2023.02: 마우나케아 대체 관측</p></article></div><p class="small">ppm: 공기 100만 분자당 CO₂ 분자 수에 해당하는 몰분율 · 관측 열과 공급자 보충 열을 구분해 사용</p></div>
+<footer class="foot"><span>원본 보존 · CC BY 4.0 · Scripps CO₂ Program, UC San Diego</span><span class="tag">DATA / NOT EMISSIONS</span></footer>
+<aside class="notes-only">자료는 Scripps가 제공하는 마우나로아 월별 CO₂ 농도 기록입니다. 원본에는 818개의 유효 관측이 있습니다.
+
+이 가운데 연간 비교에는 1959년부터 2025년까지의 관측 801개월과 결측 보충 3개월, 총 804개월을 사용했습니다. 계절 진폭은 선행 연구와 비교하기 위해 1959년부터 2019년까지를 주 분석 기간으로 삼았습니다.
+
+1964년의 결측 3개월은 증가량 분석에서는 공급자 보충값을, 계절 분석에서는 선형 보간값을 사용했습니다. 2022년 12월부터 2023년 2월까지는 공급자가 포함한 마우나케아 대체 관측을 유지했습니다.</aside>
+</section>
+<section class="slide" data-title="결과 1 · 연평균 CO₂ 농도의 상승" data-topic="01 / 장기 축적" aria-labelledby="s4">
+<p class="eyebrow teal">RESULT 01 / LEVEL</p><h2 id="s4">연평균 CO₂ 농도: <span class="accent">매년 상승</span></h2>
+<div class="content"><div class="ribbon"><strong>1960–2025년 $GROWTH_YEARS개 연도 모두 전년보다 상승</strong><span class="micro">연평균 $LEVEL_1959 → $LEVEL_2025_SHORT ppm (1959 → 2025년)</span></div><figure class="chart large"><img src="$IMAGE_1" data-source="images/result1_01_concentration.png" alt="1959~2025년 월별 농도와 12개월 이동평균. 월별 값은 계절에 따라 오르내리지만 장기적으로 계속 상승한다."></figure><p class="small">월별 값은 계절에 따라 오르내림 · 연평균은 매년 전년보다 높음 · 증가량이 가장 작았던 $LOWEST_GROWTH_YEAR년에도 +$LOWEST_GROWTH ppm</p></div>
+<footer class="foot"><span>직접 계산 · 연평균 = 12개월 산술평균 · 공급자 보충 열 사용</span><span class="tag">OBSERVATION</span></footer>
+<aside class="notes-only">먼저 연평균 CO₂ 농도의 변화를 보겠습니다. 월별 값은 계절에 따라 오르내리지만, 연평균은 1960년부터 2025년까지 66개 연도 모두 전년보다 높았습니다.
+
+증가량이 가장 작았던 1965년에도 연평균 농도는 약 0.41ppm 올랐습니다. 1959년 315.98ppm이던 연평균 농도는 2025년 427.03ppm에 이르렀습니다.
+
+다음 장에서는 이 상승의 속도가 1960년대와 최근에 어떻게 다른지 비교하겠습니다.</aside>
+</section>
+<section class="slide" data-title="결과 1 · 장기 증가 속도 비교" data-topic="01 / 장기 축적" aria-labelledby="s5">
+<p class="eyebrow teal">RESULT 01 / ACCUMULATION</p><h2 id="s5">CO₂ 농도의 증가 속도: <span class="accent">1960년대의 약 $RATIO배</span></h2>
+<div class="content"><div class="ribbon"><strong>연간 증가량: 1960년대 $EARLY <span style="color:var(--muted)">→</span> 2015–2024년 $RECENT <small>ppm/년</small></strong><span class="micro">초록: 60년 전(1960년대) · 빨강: 최근 10년(2015–2024년)</span></div><figure class="chart large"><img src="$IMAGE_2" data-source="images/result1_03_slope_comparison.png" alt="두 10년 구간을 같은 출발점 0ppm에서 비교한 그래프. 초록 선(1960년대)은 10년 동안 약 8.6ppm, 빨간 선(2014~2024년)은 약 25.6ppm 올라 기울기가 더 가파르다."></figure><p class="small">증가량 = 각 해의 연평균 농도 − 구간 시작 전 연평균 농도(1959년, 2014년) · 10년 증가량 ÷ 10 = 연간 증가 속도 · 연간 증가량 추세 +$R1_BETA ppm/년² (HAC 95% 구간 $R1_CI)</p></div>
+<footer class="foot"><span>직접 계산 · 1960–2025년 증가량 66개 · 공급자 보충 열, 원 관측 대조</span><span class="tag">OBSERVATION</span></footer>
+<aside class="notes-only">그래프는 두 10년 구간을 같은 0ppm에서 출발시켜 비교한 것입니다. 초록 선은 1960년대, 빨간 선은 2015년부터 2024년까지이고, 선이 가파를수록 농도가 빨리 올랐다는 뜻입니다.
+
+1960년대에는 농도가 1년에 평균 약 0.86ppm 올랐고, 최근에는 약 2.56ppm 올랐습니다. 약 2.97배입니다.
+
+10년 동안 1960년대에는 약 8.6ppm, 최근에는 약 25.6ppm 올랐습니다. 연간 증가량에 대한 회귀 추세도 양의 값으로, 증가 속도가 장기적으로 커졌음을 뒷받침합니다.
+
+연간 증가량이 0보다 큰 동안에는 농도가 계속 올라갑니다. 증가 속도가 낮아지더라도 농도가 안정된 것은 아닙니다.</aside>
+</section>
+
+<section class="slide" data-title="결과 2 · 초기·후기 계절 진폭 비교" data-topic="02 / 계절 교환" aria-labelledby="s6">
+<p class="eyebrow teal">RESULT 02 / SEASONAL EXCHANGE</p><h2 id="s6">계절 진폭은 초기보다 약 <span class="accent">$AMP_PERCENT% 확대</span></h2>
+<div class="content"><div class="columns wide-chart grow"><figure class="chart"><img src="$IMAGE_3" data-source="images/result2_04_seasonal_cycle_presentation.png" alt="1959~1968년과 2010~2019년의 평균 계절 곡선. 화살표는 각 곡선의 최고점과 최저점 사이인 진폭이며, 2010~2019년 쪽이 더 길다."></figure><div class="stack"><div class="card soft"><p class="label">초기 대비 후기 증가율</p><div class="metric medium">+$AMP_PERCENT<small>%</small></div></div><div><p class="label">1959–1968년</p><h3>$AMP_EARLY ppm</h3><div class="rule"></div><p class="label">2010–2019년</p><h3 class="accent">$AMP_LATE ppm</h3></div><p class="micro">수치: 연도별 진폭의 평균<br>그림: 기간별 평균 계절 곡선 · 화살표 = 곡선의 최고점과 최저점 사이</p></div></div><div class="ribbon"><strong>계절 진폭 = 장기 추세를 제외한 계절 성분의 연중 최대−최소</strong></div></div>
+<footer class="foot"><span>직접 계산 · 1959–2019년 · 매년 계절 성분의 평균을 0으로 중심화해 모양 비교</span><span class="tag">OBSERVATION</span></footer>
+<aside class="notes-only">다음으로 계절에 따른 변동폭을 비교했습니다. 계절 진폭은 장기 추세를 제외한 계절 성분에서 한 해의 가장 높은 값과 가장 낮은 값의 차이입니다.
+
+초기인 1959년부터 1968년까지와 후기인 2010년부터 2019년까지를 비교한 결과, 후기의 평균 진폭이 약 19.79% 컸습니다. 그림은 두 기간의 평균적인 계절 곡선이고, 화살표가 각 곡선의 진폭입니다. 파란색보다 주황색 화살표가 더 깁니다.
+
+오른쪽의 진폭 수치는 매년 진폭을 계산한 뒤 각 기간에 대해 평균한 값입니다.</aside>
+</section>
+
+<section class="slide" data-title="결과 2 · 계절 진폭의 장기 추세" data-topic="02 / 계절 교환" aria-labelledby="s7">
+<p class="eyebrow teal">RESULT 02 / LONG-RUN AMPLITUDE</p><h2 id="s7">계절 진폭은 <span class="accent">10년마다 약 +$AMP_SLOPE ppm 확대</span></h2>
+<div class="content"><figure class="chart large"><img src="$IMAGE_4" data-source="images/result2_03_amplitude_trend_presentation.png" alt="왼쪽은 한 해의 계절 곡선과 진폭 화살표, 오른쪽은 해마다 잰 진폭과 장기 추세. 진폭은 해마다 오르내리지만 추세선은 10년마다 0.2167ppm씩 올라간다."></figure><p class="small">빨간 선: 연도별 진폭의 장기 추세 · 10년마다 +$AMP_SLOPE ppm · 통계적 오차 범위(95%) $AMP_CI ppm · 선행 연구 +0.22 ± 0.034 ppm/10년</p></div>
+<footer class="foot"><span>직접 계산 · 방법: Jin 외(2022) §2.1 · 추세 추정은 AR(1) GLS, 세부 절차와 민감도는 부록·보고서 참조</span><span class="tag">OBSERVATION</span></footer>
+<aside class="notes-only">앞 장에서는 초기와 최근 두 기간의 계절 진폭을 비교했습니다. 이번에는 매년의 계절 진폭을 하나씩 구해, 시간이 지나면서 어떻게 변했는지 보겠습니다. 왼쪽 그림처럼 한 해의 계절 곡선에서 최고점과 최저점의 차이가 진폭이고, 장기적인 상승분은 미리 제거했습니다.
+
+오른쪽 그래프의 각 점은 해마다 잰 이 화살표의 길이입니다. 해마다 오르내림이 크지만, 전체적으로는 위로 올라가는 경향이 보입니다. 빨간 선이 그 경향이며, 10년마다 약 0.22ppm씩 커진 것으로 계산됩니다.
+
+통계적 오차 범위(95%)는 10년당 약 0.15에서 0.28ppm이고, 이 범위가 0보다 크므로 진폭이 커졌다는 결론은 유지됩니다. 선행 연구의 값인 10년당 0.22ppm과도 가깝습니다.</aside>
+</section>
+
+<section class="slide" data-title="결과 2 · 환경적 의미와 해석 범위" data-topic="02 / 결과 해석" aria-labelledby="s8">
+<p class="eyebrow teal">WHAT IT MEANS / 02</p><h2 id="s8">계절 진폭이 생기는 이유와 <span class="accent">커진 이유</span></h2>
+<div class="content"><div class="columns grow"><div class="definition"><span class="pill tint">진폭이 생기는 이유</span><div class="symbol">북반구 식물의 계절 활동</div><p class="body-copy">성장기(봄~가을): 광합성으로 흡수 → <strong>농도 하락</strong><br>그 외(겨울~봄): 분해·호흡으로 방출 → <strong>농도 상승</strong></p><p class="small">육지가 많은 북반구의 영향이 커서, 마우나로아 관측값에 해마다 같은 모양의 계절 곡선이 나타남</p></div><div class="definition"><span class="pill tint">진폭이 커진 이유</span><div class="symbol">성장기 식물 활동의 증가</div><p class="body-copy">북반구 온대·북방 숲의 영향력이 커지면서<br><strong>농도가 내려가는 폭과 올라가는 폭이 함께 커짐</strong></p><p class="small">대기 CO₂ 증가와 온난화에 따른 식물 성장·식생 변화가 원인으로 거론됨</p></div></div><div class="takeaway light">계절 진폭 확대는 북반구 식물의 계절 활동이 커졌다는 신호</div><p class="small">선행 연구(Jin 외 2022): 바람의 변화는 진폭 확대를 약 30% 줄이는 방향으로 작용 · 원인 해석은 문헌 인용이며, 이 시계열만으로 확인한 것이 아님</p></div>
+<footer class="foot"><span>원인 설명은 Jin 외(2022)와 인용된 선행 연구의 해석 · 30%는 같은 논문의 모형 결과 · 직접 추정한 기여량 아님</span><span class="tag">INTERPRETATION</span></footer>
+<aside class="notes-only">먼저 계절 진폭이 왜 생기는지 설명하겠습니다. 육지가 많은 북반구에서는 식물이 자라는 봄부터 가을까지 광합성으로 CO₂를 흡수해 농도가 내려가고, 겨울에는 분해와 호흡으로 CO₂가 방출되어 농도가 올라갑니다. 마우나로아에서 관측한 공기에 이 북반구 식물의 계절 활동이 반영되어 매년 비슷한 계절 곡선이 나타납니다.
+
+진폭이 커진 이유로, 선행 연구에서는 북반구 온대와 북방 숲의 영향력이 커진 점을 꼽습니다. 이 숲들의 활동이 커지면 성장기의 흡수와 다른 계절의 방출이 함께 커져 농도의 오르내림 폭이 커집니다. 대기 CO₂ 증가와 온난화에 따른 식물 성장과 식생 변화가 원인으로 거론됩니다.
+
+Jin 등의 모형 분석에서는 바람의 변화가 진폭 확대를 약 30% 줄이는 방향으로 작용한 것으로 해석했습니다. 이러한 원인 설명은 선행 연구의 해석이며, 이번 분석에서 이 시계열만으로 확인한 값은 아닙니다.</aside>
+</section>
+
+<section class="slide" data-title="결과 3 · 2024년 증가량과 순위" data-topic="03 / 연도별 변동" aria-labelledby="s9">
+<p class="eyebrow rust">RESULT 03 / THE 2024 RECORD</p><h2 id="s9">2024년 증가량 <span class="accent">역대 최대</span></h2>
+<div class="content"><div class="ribbon"><strong>+$RECORD ppm · 1960–2025년 연간 증가량 $HISTORY_N개 중 1위</strong><span class="pill tint">직전 10년 평균보다 $EXCESS_PERCENT% 큼</span></div><figure class="chart large"><img src="$IMAGE_5" data-source="images/result3_03_record_presentation.png" alt="1960~2025년 연도별 CO₂ 증가량 막대그래프. 2024년의 3.57ppm이 가장 높고, 이전 최고는 2016년의 3.34ppm이다."></figure><p class="small">직전 10년 평균(2014–2023년): $BASELINE ppm/년 · 2024년은 평균에서 제외<br>2025년 증가량 $GROWTH_2025 ppm ($DECLINE_PERCENT% 감소) · 연평균 농도는 계속 상승 ($LEVEL_2024 → $LEVEL_2025 ppm)</p></div>
+<footer class="foot"><span>직접 계산 · 증가량 = 올해 연평균 농도 − 작년 연평균 농도 · 공식 발표값 3.58ppm과의 차이는 REPORT.md 6.2절</span><span class="tag">OBSERVATION</span></footer>
+<aside class="notes-only">마지막으로 2024년의 증가량을 과거 기록과 비교하겠습니다. 그래프는 1960년부터 2025년까지 해마다 CO₂ 농도가 늘어난 양이고, 빨간색 막대가 2024년입니다.
+
+2024년에는 약 3.57ppm 늘어, 66개 연도 가운데 가장 컸습니다. 이전 최고 기록은 2016년의 약 3.34ppm입니다.
+
+2024년 직전 10년인 2014년부터 2023년까지의 평균은 약 2.41ppm이고, 2024년은 이보다 약 48% 큽니다.
+
+이듬해인 2025년에는 증가량이 약 2.68ppm으로 24.97% 줄었지만, 0보다 컸기 때문에 연평균 농도는 424.35ppm에서 427.03ppm으로 계속 올랐습니다.</aside>
+</section>
+
+
+<section class="slide" data-title="결과 3 · 기후·생태계 요인" data-topic="03 / 결과 해석" aria-labelledby="s10">
+<p class="eyebrow rust">WHAT IT MEANS / 03</p><h2 id="s10">2024년 기록의 배경: <span class="accent">엘니뇨</span></h2>
+<div class="content"><div class="flow" style="margin-top:1cqw"><div class="node"><strong>엘니뇨</strong><br>열대 태평양 해수면 온도 상승</div><span class="arrow" aria-hidden="true">→</span><div class="node"><strong>고온·가뭄</strong><br>육지 기후 변화</div><span class="arrow" aria-hidden="true">→</span><div class="node"><strong>식물의 CO₂ 흡수 감소</strong><br>산불·토양 분해로 방출 증가</div><span class="arrow" aria-hidden="true">→</span><div class="node" style="background:#edf3ed"><strong>대기 CO₂ 증가량 확대</strong></div></div><div class="columns grow"><div class="card"><span class="pill tint">Scripps 연구진</span><h3 style="margin-top:1.1cqw">2016년과 2024년 모두<br>엘니뇨가 증가량 확대에 기여</h3><p class="small" style="margin-top:1cqw">두 해는 각각 이전 최고 기록과 역대 최대 기록</p></div><div class="card"><span class="pill tint">가능성으로 언급</span><h3 style="margin-top:1.1cqw">남·북미 산불도<br>추가로 영향을 주었을 가능성</h3><p class="small" style="margin-top:1cqw">원인별 기여량은 제시되지 않음</p></div></div><div class="takeaway light">해마다의 증가량 차이에는 엘니뇨 같은 기후 변동이 영향을 줌</div></div>
+<footer class="foot"><span>출처: Scripps 공식 발표(2025-01-16), NOAA Climate.gov 설명 · 외부 기후·배출 시계열을 분석한 결과 아님</span><span class="tag">LITERATURE INTERPRETATION</span></footer>
+<aside class="notes-only">2024년 증가량이 이렇게 컸던 배경을 보겠습니다. 엘니뇨는 열대 태평양 중·동부의 해수면 온도가 평년보다 높아지는 현상입니다. 이때 육지에서는 고온과 가뭄이 늘어 식물의 CO₂ 흡수가 줄고, 산불과 토양 분해로 방출이 늘어 대기 CO₂가 평소보다 빠르게 늘어나는 경향이 있습니다.
+
+Scripps 연구진은 이전 최고 기록인 2016년과 2024년 모두 엘니뇨가 증가량 확대에 기여했다고 설명했습니다. 남·북미 산불이 추가로 영향을 주었을 가능성도 언급했습니다.
+
+이 설명은 문헌의 해석이며, 이번 분석에서 원인별 기여량을 직접 계산한 것은 아닙니다.</aside>
+</section>
+
+<section class="slide" data-title="종합 결론" data-topic="CONCLUSION" aria-labelledby="s11">
+<p class="eyebrow">THREE TAKEAWAYS</p><h2 id="s11">분석 결과 요약</h2>
+<div class="content"><div class="grow"><div class="summary-row"><span class="n">01</span><strong>증가 속도<br>1960년대의 약 $RATIO배</strong><p>CO₂는 매년 늘고, 늘어나는 속도도 빨라짐</p></div><div class="summary-row"><span class="n">02</span><strong>계절 진폭<br>약 $AMP_PERCENT% 확대</strong><p>북반구 식물의 계절 활동 영향이 커짐<br>10년마다 약 +$AMP_SLOPE ppm</p></div><div class="summary-row"><span class="n">03</span><strong>2024년 증가량 $RECORD ppm<br>1960–2025년 중 역대 최대</strong><p>직전 10년 평균보다 $EXCESS_PERCENT% 큼<br>엘니뇨 같은 기후 변동이 증가량에 영향</p></div></div><div class="takeaway light">CO₂ 농도는 장기적으로 더 빠르게 오르고, 그 위에 계절과 기후의 변동이 겹침</div></div>
+<footer class="foot"><span>장기 비교 → 계절 분리 → 개별 연도의 맥락 · 하나의 시계열에서 연결한 세 결과</span><span class="tag">END OF MAIN TALK</span></footer>
+<aside class="notes-only">분석 결과를 정리하겠습니다. 첫째, CO₂ 농도가 늘어나는 속도는 1960년대와 비교해 약 2.97배 빨라졌습니다.
+
+둘째, 계절에 따른 농도 변동의 폭인 계절 진폭은 초기보다 약 19.79% 커졌고, 10년마다 약 0.22ppm씩 커지는 경향입니다. 셋째, 2024년의 증가량은 약 3.57ppm으로 관측 기간 가운데 가장 컸으며, 직전 10년 평균보다 약 48.16% 컸습니다.
+
+종합하면 CO₂ 농도는 장기적으로 더 빠르게 오르고 있고, 그 위에 계절과 기후에 따른 변동이 겹쳐 있습니다.
+
+이상으로 발표를 마치겠습니다. 감사합니다.</aside>
+</section>
+
+
+
+
+</div></main>
+<nav class="controls" aria-label="슬라이드 조작"><div class="control-group"><button class="control nav" id="prev" type="button" aria-label="이전 슬라이드">←</button><span class="counter" id="counter" aria-hidden="true">01 / 15</span><button class="control nav" id="next" type="button" aria-label="다음 슬라이드">→</button></div><span class="hint">← → 이동 · M 목차 · N 메모 · F 전체화면</span><div class="control-group"><button class="control" id="tocOpen" type="button">목차</button><button class="control" id="notesOpen" type="button">발표 메모</button><button class="control" id="readerToggle" type="button" aria-pressed="false">전체 보기</button><button class="control" id="fullscreen" type="button">전체화면</button><button class="control" id="print" type="button">인쇄</button></div></nav>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div><div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+<dialog id="toc" aria-labelledby="tocTitle"><div class="dialog-head"><h2 id="tocTitle">발표 목차</h2><button type="button" class="control" data-close="toc" aria-label="목차 닫기">닫기 ✕</button></div><div id="tocGrid" class="toc-grid"></div></dialog>
+<dialog id="notes" aria-labelledby="notesTitle"><div class="dialog-head"><h2 id="notesTitle">발표 메모</h2><button type="button" class="control" data-close="notes" aria-label="발표 메모 닫기">닫기 ✕</button></div><div id="notesContent" class="speaker-note"></div></dialog>
+<script>
+(function(){
+'use strict';
+var slides=Array.from(document.querySelectorAll('.slide'));
+var current=0, reader=false;
+var prev=document.getElementById('prev'),next=document.getElementById('next');
+var toc=document.getElementById('toc'),notes=document.getElementById('notes');
+var pad=function(n){return String(n).padStart(2,'0');};
+function hashIndex(){var match=location.hash.match(/^#\/(\d+)$$/);return match?Math.max(0,Math.min(slides.length-1,Number(match[1])-1)):0;}
+function show(index,writeHash){
+ current=Math.max(0,Math.min(slides.length-1,index));
+ slides.forEach(function(slide,i){slide.hidden=!reader&&i!==current;slide.setAttribute('aria-hidden',String(!reader&&i!==current));if(!reader&&i!==current)slide.setAttribute('inert','');else slide.removeAttribute('inert');});
+ prev.disabled=current===0;next.disabled=current===slides.length-1;
+ document.getElementById('counter').textContent=pad(current+1)+' / '+pad(slides.length);
+ document.getElementById('topic').textContent=slides[current].dataset.topic;
+ document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+ document.getElementById('announcement').textContent=(current+1)+' / '+slides.length+' · '+slides[current].dataset.title;
+ document.title=(current+1)+' / '+slides.length+' · '+slides[current].dataset.title+' | CO₂';
+ document.querySelectorAll('#tocGrid button').forEach(function(button,i){button.setAttribute('aria-current',String(i===current));});
+ if(writeHash!==false)history.replaceState(null,'','#/'+(current+1));
+ if(reader&&writeHash!==false)slides[current].scrollIntoView({block:'start',behavior:'auto'});
+ if(!reader)window.scrollTo(0,0);
+}
+function move(delta){show(current+delta);}
+slides.forEach(function(slide,i){
+ var button=document.createElement('button');button.type='button';
+ var number=document.createElement('span');number.className='toc-n';number.textContent=pad(i+1)+' / '+slide.dataset.topic;
+ button.appendChild(number);button.appendChild(document.createTextNode(slide.dataset.title));
+ button.addEventListener('click',function(){toc.close();show(i);});document.getElementById('tocGrid').appendChild(button);
+});
+function openNotes(){
+ document.getElementById('notesTitle').textContent=pad(current+1)+' · '+slides[current].dataset.title;
+ document.getElementById('notesContent').textContent=slides[current].querySelector('.notes-only').textContent.trim();notes.showModal();notes.scrollTop=0;
+}
+function toast(message){var box=document.createElement('div');box.className='fullscreen-message';box.setAttribute('role','status');box.textContent=message;document.body.appendChild(box);window.setTimeout(function(){box.remove();},3500);}
+async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else toast('브라우저의 전체화면 기능을 사용해 주세요.');}catch(error){toast('전체화면이 제한되어 있습니다. 브라우저 메뉴를 이용해 주세요.');}}
+prev.addEventListener('click',function(){move(-1);});next.addEventListener('click',function(){move(1);});
+document.getElementById('tocOpen').addEventListener('click',function(){toc.showModal();});
+document.getElementById('notesOpen').addEventListener('click',openNotes);
+document.getElementById('fullscreen').addEventListener('click',fullscreen);
+document.getElementById('print').addEventListener('click',function(){window.print();});
+document.getElementById('readerToggle').addEventListener('click',function(){reader=!reader;document.body.classList.toggle('reader',reader);this.setAttribute('aria-pressed',String(reader));this.textContent=reader?'슬라이드 보기':'전체 보기';show(current,false);if(reader)slides[current].scrollIntoView({block:'start'});else window.scrollTo(0,0);});
+document.querySelectorAll('[data-close]').forEach(function(button){button.addEventListener('click',function(){document.getElementById(button.dataset.close).close();});});
+[toc,notes].forEach(function(dialog){dialog.addEventListener('click',function(event){if(event.target===dialog){var r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});});
+document.addEventListener('keydown',function(event){
+ if(event.defaultPrevented||event.altKey||event.ctrlKey||event.metaKey||toc.open||notes.open)return;
+ if(event.target.closest('input,textarea,select,[contenteditable="true"]'))return;
+ if((event.key===' '||event.key==='Enter')&&event.target.closest('a,button'))return;
+ if(event.key==='ArrowRight'||event.key==='PageDown'||event.key===' '){event.preventDefault();move(1);}
+ else if(event.key==='ArrowLeft'||event.key==='PageUp'){event.preventDefault();move(-1);}
+ else if(event.key==='Home'){event.preventDefault();show(0);}
+ else if(event.key==='End'){event.preventDefault();show(slides.length-1);}
+ else if(event.key.toLowerCase()==='m'){event.preventDefault();toc.showModal();}
+ else if(event.key.toLowerCase()==='n'){event.preventDefault();openNotes();}
+ else if(event.key.toLowerCase()==='f'){event.preventDefault();fullscreen();}
+ else if(event.key.toLowerCase()==='p'){event.preventDefault();window.print();}
+});
+var startX=0,startY=0;
+document.getElementById('deck').addEventListener('touchstart',function(event){if(event.touches.length===1){startX=event.touches[0].clientX;startY=event.touches[0].clientY;}},{passive:true});
+document.getElementById('deck').addEventListener('touchend',function(event){if(reader||toc.open||notes.open)return;var dx=event.changedTouches[0].clientX-startX,dy=event.changedTouches[0].clientY-startY;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5)move(dx<0?1:-1);},{passive:true});
+window.addEventListener('beforeprint',function(){slides.forEach(function(slide){slide.hidden=false;slide.removeAttribute('inert');slide.setAttribute('aria-hidden','false');});});
+window.addEventListener('afterprint',function(){show(current,false);});
+window.addEventListener('hashchange',function(){show(hashIndex(),false);});
+document.body.classList.add('presenting');show(hashIndex(),false);
+})();
+</script>
+</body>
+</html>

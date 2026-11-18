@@ -1,0 +1,36 @@
+{
+  "raw_sha256": "bcb4a091bec2d14516b1a9ad1c109048952f220239ab17e1dd2d52edff94a728",
+  "calendar_n": 828,
+  "observed_n": 818,
+  "observed_start": "1958-03",
+  "observed_end": "2026-09",
+  "raw_missing_n": 10,
+  "primary_analysis_calendar_n": 804,
+  "primary_analysis_observed_n": 801,
+  "primary_analysis_missing_n": 3,
+  "observed_analysis_min_ppm": 313.33,
+  "observed_analysis_max_ppm": 430.21,
+  "primary_analysis_station_counts": {
+    "MLO": 801,
+    "MKO": 3
+  },
+  "plausibility_screen": "Finite concentration strictly between 200 and 1000 ppm; not a physical error criterion",
+  "residual_diagnostic": {
+    "method": "0.6744897501960817 * (residual - median) / MAD",
+    "residual_definition": "C - cubic trend - (four harmonics + 90–540 day residual bandpass)",
+    "filter_order": 2,
+    "padding_months": 36,
+    "period": [
+      1959,
+      2025
+    ],
+    "observed_n": 801,
+    "residual_median_ppm": -0.06682031080402312,
+    "residual_mad_ppm": 0.48437021648618755,
+    "threshold_abs_z": 3.5,
+    "candidate_count": 0,
+    "candidate_months": [],
+    "action": "retain all observations; candidate is not a confirmed measurement error"
+  },
+  "deleted_observations": 0
+}
