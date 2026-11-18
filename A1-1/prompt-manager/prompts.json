@@ -1,0 +1,56 @@
+[
+  {
+    "title": "JAPAN MATE 메인 홈페이지 UI",
+    "content": "Create a high-fidelity desktop website UI for 'JAPAN MATE', a Japanese package travel guide service targeting Korean users in their 20s and 30s. Use a clean, modern travel platform style. Create the main homepage screen with a hero banner, search area, featured package tours, popular destinations and a footer.",
+    "category": "이미지 생성",
+    "favorite": false
+  },
+  {
+    "title": "JAPAN MATE 패키지 검색 결과 UI",
+    "content": "Create a high-fidelity package travel listing screen for 'JAPAN MATE'. Include filter controls, sorting options, multiple package cards, prices, duration, destination labels, ratings and pagination. Make the products easy to search and compare.",
+    "category": "이미지 생성",
+    "favorite": false
+  },
+  {
+    "title": "봄의 오사카성 여행 사진",
+    "content": "Create a geographically plausible commercial travel photograph of Osaka Castle in spring. Frame the castle with mature cherry blossoms under natural blue sky and soft morning daylight. Use a wide 16:9 landscape crop with no text, logo or watermark.",
+    "category": "이미지 생성",
+    "favorite": true
+  },
+  {
+    "title": "블로그 글 작성 도우미",
+    "content": "당신은 전문 블로거입니다. 여행 주제로 서론, 본론, 결론 구조의 글을 작성해주세요.",
+    "category": "텍스트 생성",
+    "favorite": true
+  },
+  {
+    "title": "2",
+    "content": "1",
+    "category": "이미지 생성",
+    "favorite": false
+  },
+  {
+    "title": "test제목",
+    "content": "test내용",
+    "category": "텍스트 생성",
+    "favorite": false
+  },
+  {
+    "title": "dd",
+    "content": "rrrr",
+    "category": "텍스트 생성",
+    "favorite": false
+  },
+  {
+    "title": "1234",
+    "content": "1234",
+    "category": "자동화",
+    "favorite": true
+  },
+  {
+    "title": "test 제목",
+    "content": "test 내용",
+    "category": "텍스트 생성",
+    "favorite": true
+  }
+]
