@@ -89,6 +89,9 @@ Firestore: `data/{id}` = `{date, value, memo}`, `conversations/{id}` = `{title, 
 | 월별 (Firestore `data`) | Scripps CO₂ Program, UC San Diego (CC BY 4.0) | `POST /api/data/refresh` 로 새 달만 추가(기존·수동 입력은 덮어쓰지 않음) |
 | 일별 (서버 메모리, 6시간 캐시) | NOAA GML 마우나로아 일별 (`co2_daily_mlo.csv`) | 요청 시 내려받아 캐시. 전체를 DB에 올리지 않음(무료 한도 보호) |
 
+![briefing](screenshots/08_briefing_tools.png)
+![briefing dark](screenshots/09_briefing_dark.png)
+
 ### 오늘의 AI 브리핑 (`GET /api/briefing`)
 - **사실은 코드가 계산**합니다(`services/daily.py`): 전일 대비, 7·30일 평균, 30일 최고/최저, 전년 동기 대비와 그 z-점수, 일간 변동 이상치, 자료 지연. GPT는 이 사실만 서술하며 숫자·원인을 지어내지 않도록 제한했습니다.
 - **새 관측일이 올라올 때 하루 1회만** GPT를 호출하고 `briefings/{관측일}` 에 저장합니다. 이후 요청은 메모리/DB에서 응답하므로 비용이 거의 없습니다(서버가 잠들어도 안전한 "첫 요청 시 생성" 방식).
