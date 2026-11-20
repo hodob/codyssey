@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="description" content="Scripps 마우나로아 CO₂ 시계열의 장기 증가 속도, 계절 진폭, 2024년 연간 증가량 분석. 15장 발표 자료.">
+<meta name="description" content="Scripps 마우나로아 CO₂ 시계열의 장기 증가 속도, 계절 진폭, 2024년 연간 증가량 분석. 11장 발표 자료.">
 <meta name="data-sha256" content="$RAW_SHA">
 <title>마우나로아 CO₂ 농도의 장기 추세와 변동</title>
 <style>
@@ -72,7 +72,9 @@
 
 10년 동안 1960년대에는 약 8.6ppm, 최근에는 약 25.6ppm 올랐습니다. 연간 증가량에 대한 회귀 추세도 양의 값으로, 증가 속도가 장기적으로 커졌음을 뒷받침합니다.
 
-연간 증가량이 0보다 큰 동안에는 농도가 계속 올라갑니다. 증가 속도가 낮아지더라도 농도가 안정된 것은 아닙니다.</aside>
+연간 증가량이 0보다 큰 동안에는 농도가 계속 올라갑니다. 증가 속도가 낮아지더라도 농도가 안정된 것은 아닙니다.
+
+보충하면, 오차 범위에 쓴 HAC는 연도별 값이 서로 이어져 있어도 오차 범위를 지나치게 좁게 잡지 않도록 보정하는 방법입니다.</aside>
 </section>
 
 <section class="slide" data-title="결과 2 · 초기·후기 계절 진폭 비교" data-topic="02 / 계절 교환" aria-labelledby="s6">
@@ -94,7 +96,9 @@
 
 오른쪽 그래프의 각 점은 해마다 잰 이 화살표의 길이입니다. 해마다 오르내림이 크지만, 전체적으로는 위로 올라가는 경향이 보입니다. 빨간 선이 그 경향이며, 10년마다 약 0.22ppm씩 커진 것으로 계산됩니다.
 
-통계적 오차 범위(95%)는 10년당 약 0.15에서 0.28ppm이고, 이 범위가 0보다 크므로 진폭이 커졌다는 결론은 유지됩니다. 선행 연구의 값인 10년당 0.22ppm과도 가깝습니다.</aside>
+통계적 오차 범위(95%)는 10년당 약 0.15에서 0.28ppm이고, 이 범위가 0보다 크므로 진폭이 커졌다는 결론은 유지됩니다. 선행 연구의 값인 10년당 0.22ppm과도 가깝습니다.
+
+여기서 AR(1) GLS는 전년도 진폭이 다음 해 진폭에 영향을 주는 점을 반영해 추세를 추정하는 방법입니다.</aside>
 </section>
 
 <section class="slide" data-title="결과 2 · 환경적 의미와 해석 범위" data-topic="02 / 결과 해석" aria-labelledby="s8">
@@ -150,7 +154,7 @@ Scripps 연구진은 이전 최고 기록인 2016년과 2024년 모두 엘니뇨
 
 
 </div></main>
-<nav class="controls" aria-label="슬라이드 조작"><div class="control-group"><button class="control nav" id="prev" type="button" aria-label="이전 슬라이드">←</button><span class="counter" id="counter" aria-hidden="true">01 / 15</span><button class="control nav" id="next" type="button" aria-label="다음 슬라이드">→</button></div><span class="hint">← → 이동 · M 목차 · N 메모 · F 전체화면</span><div class="control-group"><button class="control" id="tocOpen" type="button">목차</button><button class="control" id="notesOpen" type="button">발표 메모</button><button class="control" id="readerToggle" type="button" aria-pressed="false">전체 보기</button><button class="control" id="fullscreen" type="button">전체화면</button><button class="control" id="print" type="button">인쇄</button></div></nav>
+<nav class="controls" aria-label="슬라이드 조작"><div class="control-group"><button class="control nav" id="prev" type="button" aria-label="이전 슬라이드">←</button><span class="counter" id="counter" aria-hidden="true">01 / 11</span><button class="control nav" id="next" type="button" aria-label="다음 슬라이드">→</button></div><span class="hint">← → 이동 · M 목차 · N 메모 · F 전체화면</span><div class="control-group"><button class="control" id="tocOpen" type="button">목차</button><button class="control" id="notesOpen" type="button">발표 메모</button><button class="control" id="readerToggle" type="button" aria-pressed="false">전체 보기</button><button class="control" id="fullscreen" type="button">전체화면</button><button class="control" id="print" type="button">인쇄</button></div></nav>
 <div class="progress" aria-hidden="true"><span id="progress"></span></div><div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
 <dialog id="toc" aria-labelledby="tocTitle"><div class="dialog-head"><h2 id="tocTitle">발표 목차</h2><button type="button" class="control" data-close="toc" aria-label="목차 닫기">닫기 ✕</button></div><div id="tocGrid" class="toc-grid"></div></dialog>
 <dialog id="notes" aria-labelledby="notesTitle"><div class="dialog-head"><h2 id="notesTitle">발표 메모</h2><button type="button" class="control" data-close="notes" aria-label="발표 메모 닫기">닫기 ✕</button></div><div id="notesContent" class="speaker-note"></div></dialog>

@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "browser": "Chromium 156.0.8078.79",
-  "presentation_sha256": "7eca30526dc06be66304a3a5b64d1eddd4bdfc453ab5edc38decc13ecf101405",
+  "presentation_sha256": "a8fe91522ac934e67c6cffccf672411d96d40286b07d19e1426e748a2920bc5a",
   "raw_sha256": "bcb4a091bec2d14516b1a9ad1c109048952f220239ab17e1dd2d52edff94a728",
   "offline_browser_context": true,
   "remote_request_count": 0,

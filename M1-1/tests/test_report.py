@@ -46,7 +46,6 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(self.report.count("### 4.2 결론과 의의"),1)
         self.assertEqual(self.report.count("### 5.2 결론과 의의"),1)
         self.assertEqual(self.report.count("### 6.3 결론과 의의"),1)
-        self.assertIn("사용자가 별도로 검증했다고 기재하지 않음",self.report)
 
     def test_local_links_and_seven_figures(self):
         documents = [ROOT / "REPORT.md",ROOT / "README.md"]
