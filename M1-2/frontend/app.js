@@ -86,12 +86,32 @@ function drawChart(yearly) {
     svg.append(svgEl("text", { class: "axis", x: x(yr), y: H - 8, "text-anchor": "middle" }, yr));
   }
   svg.append(svgEl("polyline", { class: "line", points: yearly.map((p) => x(p.year) + "," + y(p.mean)).join(" ") }));
+  const tip = $("chart-tip");
+  const hitR = Math.min(9, (W - L - R) / Math.max(1, y1 - y0) / 2);  // 이웃 점의 호버 영역과 겹치지 않게
+  const hide = () => { tip.hidden = true; svg.querySelectorAll(".pt.active").forEach((n) => { n.classList.remove("active"); n.setAttribute("r", 2.6); }); };
+  const show = (p, dot) => {
+    hide();
+    dot.classList.add("active"); dot.setAttribute("r", 5);
+    tip.replaceChildren(el("div", p.year + "년 평균 " + p.mean + " ppm"),
+      el("small", p.count + "개월 데이터" + (p.complete ? "" : " · 부분 연도")));
+    tip.hidden = false;
+    const box = svg.getBoundingClientRect();           // viewBox → 화면 좌표로 환산
+    const left = (x(p.year) / W) * box.width;
+    const half = tip.offsetWidth / 2;                  // 실제 너비로 클램프: 양 끝에서도 그래프 밖으로 안 나감
+    tip.style.left = Math.min(Math.max(left, half), box.width - half) + "px";
+    tip.style.top = ((y(p.mean) / H) * box.height - 12) + "px";
+  };
   yearly.forEach((p) => {
-    const c = svgEl("circle", { class: "pt" + (p.complete ? "" : " partial"), cx: x(p.year), cy: y(p.mean), r: 2.6 });
-    c.append(svgEl("title", {}, p.year + "년 평균 " + p.mean + " ppm (" + p.count + "개월" + (p.complete ? "" : ", 부분 연도") + ")"));
-    svg.append(c);
+    const dot = svgEl("circle", { class: "pt" + (p.complete ? "" : " partial"), cx: x(p.year), cy: y(p.mean), r: 2.6 });
+    // 눈에 보이는 점은 작아서 마우스로 맞추기 어렵다: 투명한 넓은 영역(최대 반지름 9)으로 호버/터치를 받는다
+    const hit = svgEl("circle", { class: "hit", cx: x(p.year), cy: y(p.mean), r: hitR });
+    hit.addEventListener("mouseenter", () => show(p, dot));
+    hit.addEventListener("click", () => show(p, dot));   // 터치 기기용
+    hit.addEventListener("mouseleave", hide);
+    svg.append(dot, hit);
   });
-  $("chart-note").textContent = "속이 빈 점은 12개월이 모두 없는 부분 연도입니다. 점에 마우스를 올리면 값이 보입니다.";
+  svg.addEventListener("mouseleave", hide);
+  $("chart-note").textContent = "속이 빈 점은 12개월이 모두 없는 부분 연도입니다. 점에 마우스를 올리면(모바일은 터치) 값이 보입니다.";
 }
 async function loadStatistics() {
   const s = await api("/api/data/statistics");

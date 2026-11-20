@@ -88,13 +88,14 @@ Firestore: `data/{id}` = `{date, value, memo}`, `conversations/{id}` = `{title, 
 | 항목 | 구현 |
 |---|---|
 | 추가 지표 | `/api/data/summary` 의 `metrics` 에 `median`, `stdev`, `recent_annual_growth_ppm`(12개월이 모두 있는 연속 연도 기준 최근 최대 10개 연간 증가량 평균) 추가. `/api/data/statistics` 는 연평균·연간 증가량 목록을 반환. 요약에 들어가므로 GPT 답변에도 반영됨 |
-| 시각화 | 연평균 CO₂ 추이 그래프 1개 (바닐라 SVG, 라이브러리 없음). 12개월 미만인 부분 연도는 속이 빈 점으로 표시 |
+| 시각화 | 연평균 CO₂ 추이 그래프 1개 (바닐라 SVG, 라이브러리 없음). 12개월 미만인 부분 연도는 속이 빈 점으로 표시. 점에 마우스를 올리면(모바일은 터치) 연도·평균·개월 수 툴팁 표시 |
 | 내보내기 | 데이터 탭의 CSV / JSON 버튼 → `GET /api/data/export`. CSV 는 엑셀 한글 깨짐 방지(BOM)와 수식 주입 방지(`=`,`+`,`-`,`@` 시작 셀에 `'` 접두) 적용 |
 | 다크 모드 | 우측 상단 토글. 저장된 선택 → 시스템 설정 순으로 초기 테마 결정, 첫 페인트 전에 적용해 깜빡임 없음 |
 
 연간 증가량은 부분 연도를 비교에서 제외합니다(예: 1958·2026년). 2024년 증가량 3.58 ppm 등 `REPORT.md` 의 분석값과 일치합니다.
 
 ![chart](screenshots/04_chart_light.png)
+![tooltip](screenshots/07_chart_tooltip.png)
 ![dark](screenshots/05_dark_mode.png)
 ![export](screenshots/06_export.png)
 
