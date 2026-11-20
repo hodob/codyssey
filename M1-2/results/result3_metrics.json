@@ -1,0 +1,124 @@
+{
+  "target_year": 2024,
+  "last_complete_year_in_analysis": 2025,
+  "growth_definition": "Arithmetic mean of 12 months in y minus arithmetic mean in y-1",
+  "main_column": "co2_filled",
+  "target_growth_ppm": 3.574166666666713,
+  "rank_through_2024": {
+    "year": 2024,
+    "n": 65,
+    "period_start": 1960,
+    "period_end": 2024,
+    "rank_descending_min": 1,
+    "equal_count_including_target": 1,
+    "empirical_cdf_percent": 100.0,
+    "tie_rounding_decimal_places": 10
+  },
+  "rank_through_2025": {
+    "year": 2024,
+    "n": 66,
+    "period_start": 1960,
+    "period_end": 2025,
+    "rank_descending_min": 1,
+    "equal_count_including_target": 1,
+    "empirical_cdf_percent": 100.0,
+    "tie_rounding_decimal_places": 10
+  },
+  "observed_only_rank_through_2024": {
+    "year": 2024,
+    "n": 63,
+    "period_start": 1960,
+    "period_end": 2024,
+    "rank_descending_min": 1,
+    "equal_count_including_target": 1,
+    "empirical_cdf_percent": 100.0,
+    "tie_rounding_decimal_places": 10
+  },
+  "observed_only_rank_through_2025": {
+    "year": 2024,
+    "n": 64,
+    "period_start": 1960,
+    "period_end": 2025,
+    "rank_descending_min": 1,
+    "equal_count_including_target": 1,
+    "empirical_cdf_percent": 100.0,
+    "tie_rounding_decimal_places": 10
+  },
+  "previous_record": {
+    "year": 2016,
+    "growth_ppm": 3.3425000000000864,
+    "difference_ppm": 0.2316666666666265,
+    "relative_difference_percent": 6.930939915231726
+  },
+  "pre_event_baseline": {
+    "start_year": 2014,
+    "end_year": 2023,
+    "n": 10,
+    "mean_ppm_per_year": 2.4124166666666667,
+    "sample_sd_ppm_per_year": 0.42818170864401683,
+    "excess_ppm": 1.1617500000000462,
+    "relative_excess_percent": 48.157103872329124,
+    "descriptive_sd_units": 2.7132172546069824,
+    "interpretation": "Descriptive comparison, not a detrended anomaly or p-value"
+  },
+  "following_year": {
+    "year": 2025,
+    "growth_ppm": 2.681666666666672,
+    "growth_difference_from_2024_ppm": -0.8925000000000409,
+    "growth_change_from_2024_percent": -24.970855677314884,
+    "annual_mean_2023_ppm": 420.7733333333333,
+    "annual_mean_2024_ppm": 424.3475,
+    "annual_mean_2025_ppm": 427.0291666666667
+  },
+  "top_5_through_2025": [
+    {
+      "year": 2024,
+      "growth_ppm": 3.574166666666713
+    },
+    {
+      "year": 2016,
+      "growth_ppm": 3.3425000000000864
+    },
+    {
+      "year": 2019,
+      "growth_ppm": 2.896666666666704
+    },
+    {
+      "year": 1998,
+      "growth_ppm": 2.876666666666722
+    },
+    {
+      "year": 2013,
+      "growth_ppm": 2.700833333333321
+    }
+  ],
+  "official_reference_comparison": [
+    {
+      "year": 2016,
+      "publication_date": "2025-01-16",
+      "published_growth_ppm": 3.41,
+      "current_growth_ppm": 3.3425000000000864,
+      "current_observed_only_growth_ppm": 3.3425000000000864,
+      "current_minus_published_ppm": -0.06749999999991374
+    },
+    {
+      "year": 2024,
+      "publication_date": "2025-01-16",
+      "published_growth_ppm": 3.58,
+      "current_growth_ppm": 3.574166666666713,
+      "current_observed_only_growth_ppm": 3.574166666666713,
+      "current_minus_published_ppm": -0.005833333333287172
+    }
+  ],
+  "historical_value_difference_status": "Unresolved; archived values not retrieved",
+  "published_record_difference_ppm": 0.16999999999999993,
+  "published_record_relative_difference_percent": 4.985337243401755,
+  "notes": [
+    "2026 is incomplete and excluded.",
+    "MKO replacement observations are retained as supplied.",
+    "ECDF/rank describe the sample; they are not exceedance probabilities or return periods.",
+    "No emissions, ENSO or sink time series is used to estimate causal contributions."
+  ],
+  "raw_sha256": "bcb4a091bec2d14516b1a9ad1c109048952f220239ab17e1dd2d52edff94a728",
+  "annual_growth_2023_ppm": 2.5558333333333394
+}

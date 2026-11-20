@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CO₂ 데이터 AI 비서</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>CO₂ 데이터 AI 비서</h1>
+    <p class="sub">마우나로아 월별 CO₂(ppm) 요약을 바탕으로 답하는 챗봇</p>
+  </header>
+
+  <div id="wake" class="banner" hidden>서버를 깨우는 중입니다. 무료 서버는 첫 요청에 최대 1분 걸릴 수 있어요…</div>
+  <div id="error" class="banner error" hidden></div>
+
+  <section id="summary" class="card">
+    <h2>데이터 요약</h2>
+    <dl id="summary-body"><dt>불러오는 중…</dt></dl>
+  </section>
+
+  <nav>
+    <button class="tab active" data-tab="chat">채팅</button>
+    <button class="tab" data-tab="data">데이터 관리</button>
+    <button class="tab" data-tab="history">대화 기록</button>
+  </nav>
+
+  <main>
+    <section id="tab-chat" class="panel">
+      <div id="messages" class="messages"></div>
+      <div id="loading" class="loading" hidden>AI가 답변을 작성 중…</div>
+      <form id="chat-form">
+        <input id="chat-input" maxlength="2000" placeholder="예: 최근 CO₂ 추세는 어때?" autocomplete="off" required>
+        <button type="submit" id="chat-send">보내기</button>
+        <button type="button" id="chat-new">새 대화</button>
+      </form>
+    </section>
+
+    <section id="tab-data" class="panel" hidden>
+      <form id="data-form" class="row">
+        <input type="hidden" id="data-id">
+        <input type="date" id="data-date" required>
+        <input type="number" step="any" id="data-value" placeholder="value (ppm)" required>
+        <input id="data-memo" maxlength="200" placeholder="memo">
+        <button type="submit" id="data-submit">추가</button>
+        <button type="button" id="data-cancel" hidden>취소</button>
+      </form>
+      <p id="data-status" class="status"></p>
+      <table>
+        <thead><tr><th>date</th><th>value</th><th>memo</th><th></th></tr></thead>
+        <tbody id="data-rows"></tbody>
+      </table>
+      <div class="row pager">
+        <button id="prev">이전</button><span id="page-info"></span><button id="next">다음</button>
+      </div>
+    </section>
+
+    <section id="tab-history" class="panel" hidden>
+      <ul id="conv-list" class="conv-list"></ul>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

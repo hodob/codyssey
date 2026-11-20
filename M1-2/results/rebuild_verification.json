@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "python_version": "Python 3.13.5",
+  "raw_sha256": "bcb4a091bec2d14516b1a9ad1c109048952f220239ab17e1dd2d52edff94a728",
+  "clean_copy": true,
+  "generated_outputs_removed_before_run": true,
+  "working_directory_outside_project": true,
+  "network_disabled_in_child_python": true,
+  "automated_tests_passed": 34,
+  "byte_identical_artifact_count": 25,
+  "artifacts_sha256": {
+    "REPORT.md": "6ba44090eb7752fadd539bcd89721f4b296a1afd16f3b1863477b2477bf201c4",
+    "presentation.html": "7eca30526dc06be66304a3a5b64d1eddd4bdfc453ab5edc38decc13ecf101405",
+    "results/data_quality_metrics.json": "d1739cb4c4515706f184aaa181bee1a592ebf9b1f76c2ca3cf28681d92178b3a",
+    "results/result1_metrics.json": "c1dadaa222c9f6f70ba79cfe2261181bc62868b1c2d3553fe96b7d6cc5015cc5",
+    "results/result2_metrics.json": "6b5f00dded6e500acec5ca13f6c53bed6e1390af204f6d57b9e082d6876204e7",
+    "results/result3_metrics.json": "385102a4ab4555e5b9a0dd19bed1d7677ea4e6b45caef1f6a0c982ac9f15f333",
+    "data/processed/quality_residual_flags.csv": "9b1689e0e2eff6894099315766f1708d38895a0622e2168a8c0a9a1e78790824",
+    "data/processed/result1_annual.csv": "363abe02cabba0c28b55f8ea62f9fd54f20153aa2a1b20a505c1ac4f55ec2801",
+    "data/processed/result1_monthly.csv": "dd053c4785762f9bc1d0ece95a031028f953a62b73d374b72dbc03d10fbc5eef",
+    "data/processed/result1_periods.csv": "d5568fd116446554179a84f365229e7225f8598f3e88ffa0572548cc5eeafb6c",
+    "data/processed/result2_amplitudes.csv": "7eedbbfc405f48d5cece072a2877bab20d24fb6362b385a465068f1b5656263c",
+    "data/processed/result2_amplitudes_extended.csv": "66e3d914323eb8bfe16425eab02df8286b3f6bc7f04667f5f184ecebb6a6906c",
+    "data/processed/result2_monthly.csv": "b2ced5d471bdf81454a82b5286f0e24f520d25eddb49d92848a93ac7a4a24eed",
+    "data/processed/result3_annual.csv": "047347a5b8416aa1821e6cdeaa64a324627284e3f8cfffb6c3f56cbf620ac452",
+    "data/processed/result3_publication_comparison.csv": "40abcf4c0e32d759772d90dbcc0e3d9f1d51c9c46beb8b0f98e72a05c3884484",
+    "images/result1_01_concentration.png": "dc459690a0f35ea8bb74d476aaf1bc48539d76971d680aa0d1c76fdd05c8cb92",
+    "images/result1_02_annual_growth.png": "c926bab9552aacd9c39933bd1c891158c8530682216956777c0e5c6f0b88e6fe",
+    "images/result1_03_slope_comparison.png": "a515fa634ded3e411ce870b9c718153f48d7f75e7d413010c6b7b7c3a91f3eee",
+    "images/result2_01_seasonal_shapes.png": "94df6f21e743f3c8da355ec476a32124cf67f4b6077b0c3c5585fd2e62a01a64",
+    "images/result2_02_amplitude_trend.png": "bd6fffc66477f24c3a9e94d2745e12ab9e8e1409ec4ab6efd6c26bf9941c9d39",
+    "images/result2_03_amplitude_trend_presentation.png": "9ca309f4a4f11ac0214a1b3910e9ab4b4c8f4b8d8b36cbdcf6e07a7ba5e22800",
+    "images/result2_04_seasonal_cycle_presentation.png": "19b4e944db68e78108493153b016ec718885189bea0288ab084e2c608ea37055",
+    "images/result3_01_record_context.png": "859bc56949fcb8e0695deedd4562ef28f2dbb4b4e6f3c62b80ba50731af8169d",
+    "images/result3_02_distribution_and_concentration.png": "f9838940a2ec9aa4a196383b1a193b7d6d8b144264ac45b5a1fec46a36462eba",
+    "images/result3_03_record_presentation.png": "cda168823c130e75f7c98b24a5b5a3b232adf4096acf188e86101bf233b49af3"
+  },
+  "notes": [
+    "Selected installed interpreter, different source/output directory; dependency installation is verified separately.",
+    "Audit creation timestamp is intentionally excluded from byte equality.",
+    "This check does not perform a GitHub upload or retrieve historical data."
+  ]
+}
