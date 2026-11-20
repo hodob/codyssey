@@ -59,6 +59,7 @@ cd backend && python -m unittest discover -s tests -t .
 - 데이터: `POST/GET /api/data`, `PUT/DELETE /api/data/{id}`, `GET /api/data/summary`
 - 대화: `POST/GET /api/conversations`, `GET/DELETE /api/conversations/{id}`
   - 목록(`GET`)은 `messages` 를 **포함하지 않고** `message_count` 만 반환, 불러오기는 `GET /{id}` 로 전체 messages 조회
+- 보너스: `GET /api/data/statistics`(연평균 시계열 · 연간 증가량), `GET /api/data/export?format=csv|json`(다운로드)
 - 채팅: `POST /api/chat` — 요약 조회 → 시스템 프롬프트 삽입 → GPT 호출 → conversations 자동 저장
 
 ## 구조
@@ -81,6 +82,21 @@ Firestore: `data/{id}` = `{date, value, memo}`, `conversations/{id}` = `{title, 
 1. GitHub 에 푸시 (이 폴더가 repo 하위면 Root Directory 로 지정)
 2. Render → New Web Service: Root Directory `M1-2/backend`, Build `pip install -r requirements.txt`, Start `uvicorn main:app --host 0.0.0.0 --port $PORT`, 환경변수 위 표 입력(`ALLOWED_ORIGINS` 에 Vercel URL)
 3. Vercel → Root Directory `M1-2/frontend`, 환경변수 `API_BASE_URL`=Render URL (빌드 명령은 `vercel.json` 에 지정됨)
+
+## 보너스 과제 (인사이트 · UX 고도화)
+
+| 항목 | 구현 |
+|---|---|
+| 추가 지표 | `/api/data/summary` 의 `metrics` 에 `median`, `stdev`, `recent_annual_growth_ppm`(12개월이 모두 있는 연속 연도 기준 최근 최대 10개 연간 증가량 평균) 추가. `/api/data/statistics` 는 연평균·연간 증가량 목록을 반환. 요약에 들어가므로 GPT 답변에도 반영됨 |
+| 시각화 | 연평균 CO₂ 추이 그래프 1개 (바닐라 SVG, 라이브러리 없음). 12개월 미만인 부분 연도는 속이 빈 점으로 표시 |
+| 내보내기 | 데이터 탭의 CSV / JSON 버튼 → `GET /api/data/export`. CSV 는 엑셀 한글 깨짐 방지(BOM)와 수식 주입 방지(`=`,`+`,`-`,`@` 시작 셀에 `'` 접두) 적용 |
+| 다크 모드 | 우측 상단 토글. 저장된 선택 → 시스템 설정 순으로 초기 테마 결정, 첫 페인트 전에 적용해 깜빡임 없음 |
+
+연간 증가량은 부분 연도를 비교에서 제외합니다(예: 1958·2026년). 2024년 증가량 3.58 ppm 등 `REPORT.md` 의 분석값과 일치합니다.
+
+![chart](screenshots/04_chart_light.png)
+![dark](screenshots/05_dark_mode.png)
+![export](screenshots/06_export.png)
 
 ## 제출 스크린샷
 

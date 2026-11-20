@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CO₂ 데이터 AI 비서</title>
   <link rel="icon" href="data:,">
+  <script>
+    // 첫 페인트 전에 테마를 적용해 깜빡임을 막는다 (저장값 → 시스템 설정 순)
+    document.documentElement.dataset.theme = localStorage.getItem("theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>CO₂ 데이터 AI 비서</h1>
-    <p class="sub">마우나로아 월별 CO₂(ppm) 요약을 바탕으로 답하는 챗봇</p>
+    <div>
+      <h1>CO₂ 데이터 AI 비서</h1>
+      <p class="sub">마우나로아 월별 CO₂(ppm) 요약을 바탕으로 답하는 챗봇</p>
+    </div>
+    <button id="theme-toggle" type="button" aria-label="다크 모드 전환" title="다크 모드 전환">🌙</button>
   </header>
 
   <div id="wake" class="banner" hidden>서버를 깨우는 중입니다. 무료 서버는 첫 요청에 최대 1분 걸릴 수 있어요…</div>
@@ -19,6 +27,9 @@
   <section id="summary" class="card">
     <h2>데이터 요약</h2>
     <dl id="summary-body"><dt>불러오는 중…</dt></dl>
+    <h3>연평균 CO₂ 추이 (ppm)</h3>
+    <svg id="chart" viewBox="0 0 760 230" role="img" aria-label="연평균 CO2 농도 추이 그래프"></svg>
+    <div id="chart-note" class="note"></div>
   </section>
 
   <nav>
@@ -39,6 +50,11 @@
     </section>
 
     <section id="tab-data" class="panel" hidden>
+      <div class="row toolbar">
+        <span class="note">내보내기</span>
+        <button type="button" id="export-csv">CSV</button>
+        <button type="button" id="export-json">JSON</button>
+      </div>
       <form id="data-form" class="row">
         <input type="hidden" id="data-id">
         <input type="date" id="data-date" required>

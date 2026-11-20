@@ -6,7 +6,7 @@ let offset = 0;
 let total = 0;
 
 // ---- API 호출 (콜드스타트 안내 + 오류 표시) ----
-async function api(path, options = {}) {
+async function api(path, { blob = false, ...options } = {}) {
   const wake = setTimeout(() => ($("wake").hidden = false), 3000);
   try {
     const res = await fetch(API + path, {
@@ -21,6 +21,7 @@ async function api(path, options = {}) {
       throw new Error(detail);
     }
     $("error").hidden = true;
+    if (blob) return res.blob();
     return res.status === 204 ? null : res.json();
   } catch (e) {
     showError(e.message === "Failed to fetch" ? "서버에 연결할 수 없습니다." : e.message);
@@ -48,18 +49,70 @@ document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () 
   if (b.dataset.tab === "history") loadConversations();
 }));
 
+// ---- 다크 모드 ----
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("theme", theme);
+  $("theme-toggle").textContent = theme === "dark" ? "☀️" : "🌙";
+}
+$("theme-toggle").addEventListener("click", () => {
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
+applyTheme(document.documentElement.dataset.theme);
+
+// ---- 연평균 추이 그래프 (SVG, 라이브러리 없음) ----
+const SVG = "http://www.w3.org/2000/svg";
+function svgEl(tag, attrs, text) {
+  const n = document.createElementNS(SVG, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+function drawChart(yearly) {
+  const svg = $("chart");
+  svg.replaceChildren();
+  if (yearly.length < 2) { $("chart-note").textContent = "그래프를 그리기엔 데이터가 부족합니다."; return; }
+  const W = 760, H = 230, L = 48, R = 14, T = 12, B = 28;
+  const means = yearly.map((y) => y.mean);
+  const lo = Math.floor(Math.min(...means) / 10) * 10, hi = Math.ceil(Math.max(...means) / 10) * 10;
+  const y0 = yearly[0].year, y1 = yearly[yearly.length - 1].year;
+  const x = (yr) => L + ((yr - y0) / Math.max(1, y1 - y0)) * (W - L - R);
+  const y = (v) => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  for (let v = lo; v <= hi; v += (hi - lo) / 4) {
+    svg.append(svgEl("line", { class: "grid", x1: L, x2: W - R, y1: y(v), y2: y(v) }));
+    svg.append(svgEl("text", { class: "axis", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, Math.round(v)));
+  }
+  for (let yr = Math.ceil(y0 / 10) * 10; yr <= y1; yr += 10) {
+    svg.append(svgEl("text", { class: "axis", x: x(yr), y: H - 8, "text-anchor": "middle" }, yr));
+  }
+  svg.append(svgEl("polyline", { class: "line", points: yearly.map((p) => x(p.year) + "," + y(p.mean)).join(" ") }));
+  yearly.forEach((p) => {
+    const c = svgEl("circle", { class: "pt" + (p.complete ? "" : " partial"), cx: x(p.year), cy: y(p.mean), r: 2.6 });
+    c.append(svgEl("title", {}, p.year + "년 평균 " + p.mean + " ppm (" + p.count + "개월" + (p.complete ? "" : ", 부분 연도") + ")"));
+    svg.append(c);
+  });
+  $("chart-note").textContent = "속이 빈 점은 12개월이 모두 없는 부분 연도입니다. 점에 마우스를 올리면 값이 보입니다.";
+}
+async function loadStatistics() {
+  const s = await api("/api/data/statistics");
+  drawChart(s.yearly);
+}
+
 // ---- 요약 ----
 async function loadSummary() {
+  loadStatistics().catch(() => {});
   const s = await api("/api/data/summary");
   const body = $("summary-body");
   body.replaceChildren();
   const rows = s.count === 0 ? [["데이터", "없음"]] : [
     ["기간", s.period], ["개수", s.count + "개"],
     ["평균", s.metrics.average + " ppm"],
+    ["중앙값 / 표준편차", s.metrics.median + " / " + s.metrics.stdev + " ppm"],
     ["최대", s.metrics.max + " ppm (" + s.metrics.max_date + ")"],
     ["최소", s.metrics.min + " ppm (" + s.metrics.min_date + ")"],
     ["최근 값", s.latest.value + " ppm (" + s.latest.date + ")"],
     ["트렌드", s.trend.description],
+    ["연간 증가량", s.metrics.recent_annual_growth_ppm == null ? "계산 불가" : s.metrics.recent_annual_growth_ppm + " ppm/년 (최근 10개 연도 평균)"],
   ];
   rows.forEach(([k, v]) => { body.append(el("dt", k), el("dd", v)); });
 }
@@ -148,6 +201,20 @@ async function removeData(it) {
     await Promise.all([loadData(), loadSummary()]);
   } catch (_) {}
 }
+// ---- 내보내기 (CSV / JSON) ----
+async function exportData(format) {
+  try {
+    const blob = await api("/api/data/export?format=" + format, { blob: true });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "co2_data." + format;
+    document.body.append(a); a.click(); a.remove();
+    URL.revokeObjectURL(a.href);
+    $("data-status").textContent = format.toUpperCase() + " 파일을 내려받았습니다.";
+  } catch (_) {}
+}
+$("export-csv").addEventListener("click", () => exportData("csv"));
+$("export-json").addEventListener("click", () => exportData("json"));
 $("prev").addEventListener("click", () => { offset = Math.max(0, offset - PAGE); loadData(); });
 $("next").addEventListener("click", () => { offset += PAGE; loadData(); });
 

@@ -80,6 +80,29 @@ class ApiTest(unittest.TestCase):
         self.assertIn("a ~ b", p)
         self.assertIn("3개", p)
 
+    def test_statistics_endpoint(self):
+        for i in range(24):
+            self.add(f"{2000 + i // 12}-{i % 12 + 1:02d}-15", 400 + i)
+        st = self.c.get("/api/data/statistics").json()
+        self.assertEqual([y["year"] for y in st["yearly"]], [2000, 2001])
+        self.assertEqual(st["recent_annual_growth_ppm"], 12.0)
+
+    def test_export_csv_and_json(self):
+        self.add("2024-01-15", 420.5, "=SUM(1)")
+        self.add("2024-02-15", 421.0, "정상,메모")
+        r = self.c.get("/api/data/export?format=csv")
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("attachment", r.headers["content-disposition"])
+        self.assertIn("co2_data.csv", r.headers["content-disposition"])
+        text = r.content.decode("utf-8-sig")
+        self.assertTrue(text.startswith("id,date,value,memo"))
+        self.assertIn("'=SUM(1)", text)       # 수식 주입 방지
+        self.assertIn('"정상,메모"', text)     # 쉼표는 따옴표로 감쌈
+        j = self.c.get("/api/data/export?format=json")
+        self.assertEqual([i["date"] for i in j.json()], ["2024-01-15", "2024-02-15"])
+        self.assertIn("co2_data.json", j.headers["content-disposition"])
+        self.assertEqual(self.c.get("/api/data/export?format=xml").status_code, 422)
+
     def test_cors(self):
         r = self.c.options("/api/data", headers={"Origin": "http://localhost:5500",
                                                  "Access-Control-Request-Method": "GET"})

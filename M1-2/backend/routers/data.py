@@ -1,11 +1,15 @@
+import csv
+import io
+import json
 from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import Response
 
 from schemas import DataIn, DataList, DataOut
 from services import repository as repo
 from services.firebase import get_db
-from services.summary import summarize
+from services.summary import build_statistics, summarize
 
 router = APIRouter(prefix="/api/data", tags=["data"])
 
@@ -31,6 +35,35 @@ def list_items(limit: int = Query(50, ge=1, le=1000), offset: int = Query(0, ge=
 @router.get("/summary", summary="데이터 요약 (프롬프트 주입용)")
 def summary(db=Depends(get_db)):
     return summarize(repo.list_data(db))
+
+
+@router.get("/statistics", summary="추가 통계 (연평균 시계열 · 연간 증가량)")
+def statistics(db=Depends(get_db)):
+    return build_statistics(repo.list_data(db))
+
+
+def _safe_cell(text: str) -> str:
+    # CSV 수식 주입 방지: 엑셀이 =,+,-,@ 로 시작하는 셀을 수식으로 해석하지 않게 한다
+    return "'" + text if text[:1] in ("=", "+", "-", "@") else text
+
+
+@router.get("/export", summary="데이터 내보내기 (CSV 또는 JSON 다운로드)")
+def export(format: Literal["csv", "json"] = "csv", db=Depends(get_db)):
+    items = repo.list_data(db)
+    if format == "json":
+        body = json.dumps([{k: i[k] for k in ("id", "date", "value", "memo")} for i in items],
+                          ensure_ascii=False, indent=2)
+        media, name = "application/json; charset=utf-8", "co2_data.json"
+    else:
+        buf = io.StringIO()
+        w = csv.writer(buf)
+        w.writerow(["id", "date", "value", "memo"])
+        for i in items:
+            w.writerow([i["id"], i["date"], i["value"], _safe_cell(i["memo"])])
+        body = "\ufeff" + buf.getvalue()  # BOM: 엑셀에서 한글 memo 가 깨지지 않게
+        media, name = "text/csv; charset=utf-8", "co2_data.csv"
+    return Response(content=body, media_type=media,
+                    headers={"Content-Disposition": f'attachment; filename="{name}"'})
 
 
 @router.put("/{item_id}", response_model=DataOut, summary="데이터 수정")
