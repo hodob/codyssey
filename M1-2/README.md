@@ -12,9 +12,9 @@
 
 | 구분 | URL |
 |---|---|
-| 프론트엔드 | https://(your-app).vercel.app |
-| 백엔드 API | https://(your-api).onrender.com |
-| Swagger UI | https://(your-api).onrender.com/docs |
+| 프론트엔드 | https://co2-ai-assistant.vercel.app |
+| 백엔드 API | https://co2-ai-assistant-api.onrender.com |
+| Swagger UI | https://co2-ai-assistant-api.onrender.com/docs |
 
 > Render 무료 티어는 15분 미사용 시 잠들어 첫 요청이 최대 1분 걸립니다. 프론트는 3초 넘게 응답이 없으면 "서버를 깨우는 중" 안내를 표시합니다.
 
@@ -97,7 +97,7 @@ Firestore: `data/{id}` = `{date, value, memo}`, `conversations/{id}` = `{title, 
 ![history list](screenshots/03a_history_list.png)
 ![history loaded](screenshots/03_history_loaded.png)
 
-> 로컬 실행 화면입니다. 배포 후 배포 URL 화면으로 교체하세요.
+> 배포된 프론트(Vercel) 화면에서 촬영했습니다.
 
 ---
 
