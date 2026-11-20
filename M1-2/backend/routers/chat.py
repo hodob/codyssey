@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 
+import config
 from schemas import ChatIn, ChatOut
 from services import llm, tools
 from services import repository as repo
@@ -35,4 +36,4 @@ def chat(body: ChatIn, db=Depends(get_db)):
     else:
         conv_id = repo.create_conversation(db, body.message[:30], new)["id"]
     return {"reply": reply, "conversation_id": conv_id,
-            "tools_used": result["tools_used"], "usage": result["usage"]}
+            "tools_used": result["tools_used"], "usage": result["usage"], "model": config.OPENAI_MODEL}

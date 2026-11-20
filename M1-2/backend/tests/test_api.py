@@ -71,6 +71,7 @@ class ApiTest(unittest.TestCase):
             self.assertEqual(r.json()["reply"], "답변")
             self.assertEqual(r.json()["tools_used"], ["get_recent_daily(days=3)"])
             self.assertEqual(r.json()["usage"]["prompt_tokens"], 7)
+            self.assertEqual(r.json()["model"], __import__("config").OPENAI_MODEL)
             self.assertEqual(ask.call_args.args[0]["count"], 1)
             cid = r.json()["conversation_id"]
             self.c.post("/api/chat", json={"message": "더?", "conversation_id": cid})

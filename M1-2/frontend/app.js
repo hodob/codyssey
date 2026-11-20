@@ -166,7 +166,7 @@ function renderMessages(messages) {
   if (!messages.length) box.append(el("div", "질문을 입력해 보세요.", "empty"));
   messages.forEach((m) => addBubble(m.role, m.content, m.tools || []));
 }
-function addBubble(role, text, tools = [], usage = null) {
+function addBubble(role, text, tools = [], usage = null, model = null) {
   const box = $("messages");
   box.querySelector(".empty")?.remove();
   box.append(el("div", text, "msg " + role));
@@ -174,7 +174,7 @@ function addBubble(role, text, tools = [], usage = null) {
     // 어떤 도구를 호출해 답했는지 투명하게 보여 준다 (과제: 호출 근거 설명)
     const parts = [];
     if (tools.length) parts.push("🔧 도구: " + tools.join(", "));
-    if (usage) parts.push("토큰 입력 " + usage.prompt_tokens + " / 출력 " + usage.completion_tokens);
+    if (usage) parts.push((model ? model + " · " : "") + "토큰 입력 " + usage.prompt_tokens + " / 출력 " + usage.completion_tokens);
     box.append(el("div", parts.join(" · "), "toolnote"));
   }
   box.scrollTop = box.scrollHeight;
@@ -190,7 +190,7 @@ $("chat-form").addEventListener("submit", async (e) => {
   try {
     const r = await api("/api/chat", { method: "POST", body: JSON.stringify({ message: text, conversation_id: convId }) });
     convId = r.conversation_id;
-    addBubble("assistant", r.reply, r.tools_used || [], r.usage);
+    addBubble("assistant", r.reply, r.tools_used || [], r.usage, r.model);
   } catch (_) {
     addBubble("assistant", "(답변을 받지 못했습니다. 위 오류 메시지를 확인해 주세요.)");
   } finally {

@@ -65,3 +65,4 @@ class ChatOut(BaseModel):
     conversation_id: str
     tools_used: list[str] = []
     usage: Optional[dict[str, int]] = None
+    model: Optional[str] = None
