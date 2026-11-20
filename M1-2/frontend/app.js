@@ -41,6 +41,17 @@ function el(tag, text, cls) {
   return n;
 }
 
+// ---- 확인 대화상자 (네이티브 confirm 대신 <dialog>: 다크 모드와 어울리고 자동 테스트가 가능) ----
+function confirmDialog(message) {
+  return new Promise((resolve) => {
+    const d = $("confirm-dialog");
+    $("confirm-text").textContent = message;
+    d.returnValue = "";
+    d.addEventListener("close", () => resolve(d.returnValue === "ok"), { once: true });   // Esc/취소는 false
+    d.showModal();
+  });
+}
+
 // ---- 탭 ----
 document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => {
   document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === b));
@@ -202,6 +213,13 @@ $("chat-new").addEventListener("click", () => { convId = null; renderMessages([]
 
 // ---- 데이터 관리 (CRUD) ----
 async function loadData() {
+  if (!$("data-rows").children.length) {   // 첫 로딩 동안 빈 표 대신 안내 행
+    const tr = document.createElement("tr");
+    const td = el("td", "불러오는 중…", "note");
+    td.colSpan = 4;
+    tr.append(td);
+    $("data-rows").append(tr);
+  }
   const r = await api("/api/data?limit=" + PAGE + "&offset=" + offset + "&order=desc");
   total = r.total;
   const tbody = $("data-rows");
@@ -222,6 +240,7 @@ async function loadData() {
   $("next").disabled = offset + PAGE >= total;
 }
 function startEdit(it) {
+  $("data-status").textContent = "";
   $("data-id").value = it.id; $("data-date").value = it.date;
   $("data-value").value = it.value; $("data-memo").value = it.memo;
   $("data-submit").textContent = "수정 저장"; $("data-cancel").hidden = false;
@@ -243,7 +262,7 @@ $("data-form").addEventListener("submit", async (e) => {
   } catch (_) { $("data-status").textContent = ""; }
 });
 async function removeData(it) {
-  if (!confirm(it.date + " 데이터를 삭제할까요?")) return;
+  if (!(await confirmDialog(it.date + " 데이터를 삭제할까요?"))) return;
   try {
     await api("/api/data/" + encodeURIComponent(it.id), { method: "DELETE" });
     $("data-status").textContent = "삭제되었습니다.";
@@ -280,6 +299,11 @@ $("prev").addEventListener("click", () => { offset = Math.max(0, offset - PAGE);
 $("next").addEventListener("click", () => { offset += PAGE; loadData(); });
 
 // ---- 대화 기록 ----
+function localTime(iso) {   // 서버는 UTC(ISO)로 저장 → 사용자 시간대로 표시
+  const d = new Date(iso);
+  return isNaN(d) ? iso.slice(0, 16).replace("T", " ")
+    : d.toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+}
 async function loadConversations() {
   const list = await api("/api/conversations");
   const ul = $("conv-list");
@@ -288,12 +312,12 @@ async function loadConversations() {
   list.forEach((c) => {
     const li = document.createElement("li");
     const info = el("div", undefined, "info");
-    info.append(el("div", c.title), el("small", c.message_count + "개 메시지 · " + c.updated_at.slice(0, 16).replace("T", " ")));
+    info.append(el("div", c.title), el("small", c.message_count + "개 메시지 · " + localTime(c.updated_at)));
     const open = el("button", "불러오기");
     open.onclick = () => openConversation(c.id);
     const del = el("button", "삭제");
     del.onclick = async () => {
-      if (!confirm("이 대화를 삭제할까요?")) return;
+      if (!(await confirmDialog("이 대화를 삭제할까요?"))) return;
       await api("/api/conversations/" + encodeURIComponent(c.id), { method: "DELETE" });
       if (convId === c.id) { convId = null; renderMessages([]); }
       loadConversations();

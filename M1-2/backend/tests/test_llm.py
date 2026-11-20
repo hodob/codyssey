@@ -44,6 +44,7 @@ class PromptTest(unittest.TestCase):
         self.assertLess(len(p), 1100)                      # 컨텍스트 예산
         self.assertIn("오늘 날짜(KST)", p)
         self.assertIn("1~2일 늦게", p)
+        self.assertIn("다시 호출하지 말고", p)       # 이전 답변의 값은 재사용
         self.assertTrue(p.index("get_recent_daily") < p.index("[사용자 데이터 요약"))  # 고정 지침이 앞
 
     def test_prompt_uses_given_today(self):

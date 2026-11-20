@@ -68,4 +68,15 @@ td button { padding: 3px 8px; margin-right: 4px; }
 .conv-list { list-style: none; padding: 0; margin: 0; }
 .conv-list li { display: flex; align-items: center; gap: 8px; padding: 10px; border-bottom: 1px solid var(--row); }
 .conv-list .info { flex: 1; } .conv-list small { color: var(--faint); }
+dialog { background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; max-width: 360px; box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+dialog::backdrop { background: rgba(0,0,0,.5); }
+dialog p { margin: 0 0 14px; line-height: 1.5; }
+dialog form { display: block; margin: 0; }
+.dialog-actions { justify-content: flex-end; margin: 0; }
+button.danger { background: #c0392b; border-color: #c0392b; color: #fff; }
+[data-theme="dark"] button.danger { background: #e0584a; border-color: #e0584a; color: #1a0a08; }
+@media (max-width: 600px) {
+  #chart .axis { font-size: 22px; }   /* 화면 폭에 맞춰 축소되는 SVG 안의 글자가 너무 작아지지 않게 */
+  #chart .pt { r: 4px; }
+}
 [hidden] { display: none !important; }

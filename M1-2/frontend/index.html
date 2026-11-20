@@ -92,6 +92,16 @@
     </section>
   </main>
 
+  <dialog id="confirm-dialog" aria-labelledby="confirm-text">
+    <form method="dialog">
+      <p id="confirm-text"></p>
+      <div class="row dialog-actions">
+        <button value="cancel" autofocus>취소</button>
+        <button value="ok" class="danger">삭제</button>
+      </div>
+    </form>
+  </dialog>
+
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
