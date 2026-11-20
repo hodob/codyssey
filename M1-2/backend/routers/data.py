@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import Response
 
 from schemas import DataIn, DataList, DataOut
+from services import monthly
 from services import repository as repo
 from services.firebase import get_db
 from services.summary import build_statistics, summarize
@@ -64,6 +65,16 @@ def export(format: Literal["csv", "json"] = "csv", db=Depends(get_db)):
         media, name = "text/csv; charset=utf-8", "co2_data.csv"
     return Response(content=body, media_type=media,
                     headers={"Content-Disposition": f'attachment; filename="{name}"'})
+
+
+@router.post("/refresh", summary="최신 월별 자료 확인 (Scripps 원본에서 새 달만 추가, 10분 쿨다운)")
+def refresh(db=Depends(get_db)):
+    try:
+        return monthly.refresh(db)
+    except monthly.Cooldown as e:
+        raise HTTPException(429, f"너무 자주 요청했습니다. {e.remaining}초 뒤에 다시 시도해 주세요.")
+    except monthly.SourceUnavailable as e:
+        raise HTTPException(502, str(e))
 
 
 @router.put("/{item_id}", response_model=DataOut, summary="데이터 수정")

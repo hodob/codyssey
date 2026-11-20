@@ -8,7 +8,7 @@ from services.firebase import CONVERSATIONS, DATA
 
 # data 컬렉션 전체(약 800개)를 요청마다 읽으면 Firestore 무료 읽기 한도(하루 5만 건)를 금방 넘는다.
 # 서버 메모리에 캐시하고, 이 서버를 통한 쓰기는 즉시 무효화한다.
-CACHE_TTL_SECONDS = 300
+CACHE_TTL_SECONDS = 3600
 _cache = {"items": None, "at": 0.0}
 
 

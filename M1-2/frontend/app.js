@@ -118,6 +118,28 @@ async function loadStatistics() {
   drawChart(s.yearly);
 }
 
+// ---- 오늘의 AI 브리핑 ----
+async function loadBriefing() {
+  const text = $("briefing-text");
+  text.classList.add("pending");
+  try {
+    const b = await api("/api/briefing");
+    text.classList.remove("pending");
+    text.textContent = b.text;
+    const badge = $("briefing-badge");
+    badge.textContent = b.ai ? "AI 생성 · " + b.model : "자동 요약 (AI 미사용)";
+    badge.hidden = false;
+    const ul = $("briefing-facts");
+    ul.replaceChildren(...b.facts.map((f) => el("li", f)));
+    $("briefing-details").hidden = false;
+    $("briefing-note").textContent = "기준 관측일 " + b.asof + " · " + b.source +
+      " · 새 데이터가 올라올 때 하루 1회 생성" + (b.cached ? " (저장된 브리핑)" : "");
+  } catch (e) {
+    text.classList.remove("pending");
+    text.textContent = "브리핑을 불러오지 못했습니다. (" + e.message + ")";
+  }
+}
+
 // ---- 요약 ----
 async function loadSummary() {
   loadStatistics().catch(() => {});
@@ -142,12 +164,19 @@ function renderMessages(messages) {
   const box = $("messages");
   box.replaceChildren();
   if (!messages.length) box.append(el("div", "질문을 입력해 보세요.", "empty"));
-  messages.forEach((m) => addBubble(m.role, m.content));
+  messages.forEach((m) => addBubble(m.role, m.content, m.tools || []));
 }
-function addBubble(role, text) {
+function addBubble(role, text, tools = [], usage = null) {
   const box = $("messages");
   box.querySelector(".empty")?.remove();
   box.append(el("div", text, "msg " + role));
+  if (role === "assistant" && (tools.length || usage)) {
+    // 어떤 도구를 호출해 답했는지 투명하게 보여 준다 (과제: 호출 근거 설명)
+    const parts = [];
+    if (tools.length) parts.push("🔧 도구: " + tools.join(", "));
+    if (usage) parts.push("토큰 입력 " + usage.prompt_tokens + " / 출력 " + usage.completion_tokens);
+    box.append(el("div", parts.join(" · "), "toolnote"));
+  }
   box.scrollTop = box.scrollHeight;
 }
 $("chat-form").addEventListener("submit", async (e) => {
@@ -161,7 +190,7 @@ $("chat-form").addEventListener("submit", async (e) => {
   try {
     const r = await api("/api/chat", { method: "POST", body: JSON.stringify({ message: text, conversation_id: convId }) });
     convId = r.conversation_id;
-    addBubble("assistant", r.reply);
+    addBubble("assistant", r.reply, r.tools_used || [], r.usage);
   } catch (_) {
     addBubble("assistant", "(답변을 받지 못했습니다. 위 오류 메시지를 확인해 주세요.)");
   } finally {
@@ -233,6 +262,18 @@ async function exportData(format) {
     $("data-status").textContent = format.toUpperCase() + " 파일을 내려받았습니다.";
   } catch (_) {}
 }
+$("refresh-monthly").addEventListener("click", async () => {
+  const btn = $("refresh-monthly");
+  btn.disabled = true;
+  try {
+    const r = await api("/api/data/refresh", { method: "POST" });
+    $("data-status").textContent = r.added
+      ? "새 달 " + r.added + "개를 추가했습니다: " + r.added_months.join(", ")
+      : "이미 최신입니다. (원본의 최신 월: " + r.source_latest + ")";
+    if (r.added) await Promise.all([loadData(), loadSummary()]);
+  } catch (_) { $("data-status").textContent = ""; }
+  finally { btn.disabled = false; }
+});
 $("export-csv").addEventListener("click", () => exportData("csv"));
 $("export-json").addEventListener("click", () => exportData("json"));
 $("prev").addEventListener("click", () => { offset = Math.max(0, offset - PAGE); loadData(); });
@@ -271,3 +312,4 @@ async function openConversation(id) {
 // ---- 시작 ----
 renderMessages([]);
 loadSummary().catch(() => {});
+loadBriefing();

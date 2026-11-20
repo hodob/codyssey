@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from google.api_core.exceptions import GoogleAPICallError, ResourceExhausted
 
 import config
-from routers import chat, conversations, data
+from routers import briefing, chat, conversations, data
 
 app = FastAPI(
     title="CO2 데이터 AI 비서 API",
@@ -29,6 +29,7 @@ async def firestore_error(request: Request, exc: GoogleAPICallError):
 
 app.include_router(data.router)
 app.include_router(conversations.router)
+app.include_router(briefing.router)
 app.include_router(chat.router)
 
 

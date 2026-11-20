@@ -55,7 +55,9 @@ class ApiTest(unittest.TestCase):
         lst = self.c.get("/api/conversations").json()
         self.assertEqual(lst[0]["message_count"], 2)
         self.assertNotIn("messages", lst[0])
-        self.assertEqual(self.c.get(f"/api/conversations/{cid}").json()["messages"], msgs)
+        got = self.c.get(f"/api/conversations/{cid}").json()["messages"]
+        self.assertEqual([{k: m[k] for k in ("role", "content")} for m in got], msgs)
+        self.assertEqual([m["tools"] for m in got], [[], []])      # 도구 기록 필드는 기본 빈 목록
         self.assertEqual(self.c.delete(f"/api/conversations/{cid}").status_code, 204)
         self.assertEqual(self.c.get(f"/api/conversations/{cid}").status_code, 404)
         bad = self.c.post("/api/conversations", json={"title": "t", "messages": [{"role": "system", "content": "x"}]})
@@ -63,14 +65,19 @@ class ApiTest(unittest.TestCase):
 
     def test_chat_injects_summary_and_saves(self):
         self.add("2024-01-15", 420)
-        with mock.patch.object(llm, "ask", return_value="답변") as ask:
+        out = {"reply": "답변", "tools_used": ["get_recent_daily(days=3)"], "usage": {"prompt_tokens": 7, "completion_tokens": 3}}
+        with mock.patch.object(llm, "ask", return_value=out) as ask:
             r = self.c.post("/api/chat", json={"message": "추세는?"})
             self.assertEqual(r.json()["reply"], "답변")
+            self.assertEqual(r.json()["tools_used"], ["get_recent_daily(days=3)"])
+            self.assertEqual(r.json()["usage"]["prompt_tokens"], 7)
             self.assertEqual(ask.call_args.args[0]["count"], 1)
             cid = r.json()["conversation_id"]
             self.c.post("/api/chat", json={"message": "더?", "conversation_id": cid})
         conv = self.c.get(f"/api/conversations/{cid}").json()
         self.assertEqual([m["role"] for m in conv["messages"]], ["user", "assistant"] * 2)
+        self.assertEqual(conv["messages"][1]["tools"], ["get_recent_daily(days=3)"])   # 도구 호출 기록이 저장됨
+        self.assertEqual(conv["messages"][0]["tools"], [])
 
     def test_chat_errors(self):
         with mock.patch.object(llm, "ask", side_effect=llm.LLMError("fail")):
@@ -80,7 +87,7 @@ class ApiTest(unittest.TestCase):
 
     def test_system_prompt(self):
         p = llm.build_system_prompt({"period": "a ~ b", "count": 3, "metrics": {"max": 1},
-                                     "latest": None, "trend": {"description": "상승"}})
+                                     "latest": None, "trend": {"direction": "상승"}})
         self.assertIn("a ~ b", p)
         self.assertIn("3개", p)
 
@@ -137,6 +144,33 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(r.status_code, 503)
         self.assertIn("한도", r.json()["detail"])
         self.assertEqual(r.headers.get("access-control-allow-origin"), "http://localhost:5500")
+
+    def test_briefing_endpoint(self):
+        from services import briefing, daily
+        from tests.test_daily import make_rows
+        briefing._memory.clear()
+        with mock.patch.object(daily, "fetch_rows", return_value=make_rows()), \
+                mock.patch.object(llm, "complete", return_value={"text": "브리핑", "usage": {}}):
+            r = self.c.get("/api/briefing")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()["text"], "브리핑")
+        self.assertTrue(r.json()["facts"])
+        briefing._memory.clear()
+        with mock.patch.object(daily, "fetch_rows", side_effect=daily.DailyUnavailable("down")):
+            self.assertEqual(self.c.get("/api/briefing").status_code, 503)
+
+    def test_refresh_endpoint(self):
+        from services import monthly
+        from tests.test_monthly import SAMPLE
+        monthly._last["at"] = None
+        with mock.patch.object(monthly, "fetch", return_value=SAMPLE):
+            r = self.c.post("/api/data/refresh")
+            self.assertEqual(r.json()["added"], 3)
+            self.assertEqual(self.c.post("/api/data/refresh").status_code, 429)   # 쿨다운
+        monthly._last["at"] = None
+        with mock.patch.object(monthly, "fetch", side_effect=monthly.SourceUnavailable("x")):
+            self.assertEqual(self.c.post("/api/data/refresh").status_code, 502)
+        monthly._last["at"] = None
 
     def test_cors(self):
         r = self.c.options("/api/data", headers={"Origin": "http://localhost:5500",

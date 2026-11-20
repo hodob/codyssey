@@ -34,6 +34,12 @@ dt { color: var(--muted); } dd { margin: 0; font-weight: 600; }
 #chart .pt { fill: var(--chart-line); }
 #chart .pt.partial { fill: var(--card); stroke: var(--chart-partial); stroke-width: 1.5; }
 .note { color: var(--faint); font-size: .8rem; }
+.badge { font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--bubble); color: var(--muted); vertical-align: middle; }
+.briefing-text { margin: 4px 0 8px; line-height: 1.6; white-space: pre-wrap; }
+.briefing-text.pending { color: var(--muted); animation: pulse 1.2s infinite; }
+details summary { cursor: pointer; color: var(--muted); font-size: .85rem; }
+.facts { margin: 6px 0 4px; padding-left: 20px; font-size: .88rem; line-height: 1.6; }
+.toolnote { align-self: flex-start; margin: -4px 0 0 6px; font-size: .75rem; color: var(--faint); }
 nav { display: flex; gap: 6px; margin-bottom: 8px; }
 .tab { flex: 1; padding: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; }
 .tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }

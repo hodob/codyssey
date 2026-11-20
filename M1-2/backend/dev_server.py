@@ -22,14 +22,22 @@ for doc_id, payload in build_records():
 app.dependency_overrides[get_db] = lambda: db
 
 
-def fake_ask(summary, history, question):
-    # 실제 GPT 대신 주입된 요약을 그대로 보여 주는 답변 (컨텍스트 주입 확인용)
-    return (f"[개발용 가짜 응답] 질문: {question}\n"
-            f"기간 {summary['period']}, {summary['count']}개, 평균 {summary['metrics'].get('average')} ppm, "
-            f"트렌드 {summary['trend']['description']}")
+def fake_ask(summary, history, question, run_tool=None):
+    # 실제 GPT 대신: 질문에 '오늘/최근'이 있으면 도구를 실제로 실행해 보여 준다 (배선 확인용)
+    used, extra = [], ""
+    if run_tool and any(w in question for w in ("오늘", "어제", "최근", "특이")):
+        used.append("get_today_highlights()")
+        extra = "\n도구 결과: " + run_tool("get_today_highlights", {})[:300]
+    return {"reply": f"[개발용 가짜 응답] 질문: {question}\n월별 {summary['count']}개, 평균 {summary['metrics'].get('average')} ppm{extra}",
+            "tools_used": used, "usage": {"prompt_tokens": 0, "completion_tokens": 0}}
+
+
+def fake_complete(system, user, model=None, max_tokens=None):
+    return {"text": "[개발용 가짜 브리핑] " + user.splitlines()[0].lstrip("- "), "usage": {}}
 
 
 llm.ask = fake_ask
+llm.complete = fake_complete
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

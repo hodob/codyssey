@@ -34,6 +34,7 @@ class DataList(BaseModel):
 class Message(BaseModel):
     role: Literal["user", "assistant"]
     content: str = Field(min_length=1, max_length=8000)
+    tools: list[str] = Field(default_factory=list, max_length=10)  # 이 답변에 사용된 도구 호출 기록
 
 
 class ConversationIn(BaseModel):
@@ -62,3 +63,5 @@ class ChatIn(BaseModel):
 class ChatOut(BaseModel):
     reply: str
     conversation_id: str
+    tools_used: list[str] = []
+    usage: Optional[dict[str, int]] = None
