@@ -4,13 +4,17 @@ from unittest import mock
 from fastapi.testclient import TestClient
 
 from main import app
+from google.api_core.exceptions import ResourceExhausted
+
 from services import llm
+from services import repository as repo
 from services.firebase import get_db
 from tests.fake_db import FakeDB
 
 
 class ApiTest(unittest.TestCase):
     def setUp(self):
+        repo.clear_cache()
         self.db = FakeDB()
         app.dependency_overrides[get_db] = lambda: self.db
         self.c = TestClient(app)
@@ -102,6 +106,37 @@ class ApiTest(unittest.TestCase):
         self.assertEqual([i["date"] for i in j.json()], ["2024-01-15", "2024-02-15"])
         self.assertIn("co2_data.json", j.headers["content-disposition"])
         self.assertEqual(self.c.get("/api/data/export?format=xml").status_code, 422)
+
+    def test_data_list_is_cached_and_invalidated_on_write(self):
+        self.add("2024-01-15", 420)
+        reads = []
+        orig = self.db.collection
+
+        def counting(name):
+            col = orig(name)
+            stream = col.stream
+            col.stream = lambda: (reads.append(1), stream())[1]
+            return col
+
+        self.db.collection = counting
+        for _ in range(3):
+            self.c.get("/api/data/summary")
+        self.assertEqual(len(reads), 1)                       # 3번 요청해도 Firestore 는 1번만 읽음
+        self.add("2024-02-15", 424)                           # 쓰기 → 캐시 무효화
+        self.assertEqual(self.c.get("/api/data/summary").json()["count"], 2)
+        self.assertEqual(len(reads), 2)
+
+    def test_quota_error_serves_stale_cache_then_503_with_cors(self):
+        self.add("2024-01-15", 420)
+        self.c.get("/api/data/summary")                       # 캐시 채움
+        repo._cache["at"] = -10_000                           # 만료시킴
+        self.db.collection = lambda name: (_ for _ in ()).throw(ResourceExhausted("quota"))
+        self.assertEqual(self.c.get("/api/data/summary").json()["count"], 1)   # 오래된 캐시로 응답
+        repo.clear_cache()
+        r = self.c.get("/api/data/summary", headers={"Origin": "http://localhost:5500"})
+        self.assertEqual(r.status_code, 503)
+        self.assertIn("한도", r.json()["detail"])
+        self.assertEqual(r.headers.get("access-control-allow-origin"), "http://localhost:5500")
 
     def test_cors(self):
         r = self.c.options("/api/data", headers={"Origin": "http://localhost:5500",

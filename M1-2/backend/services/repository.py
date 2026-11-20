@@ -1,7 +1,19 @@
 """Firestore 읽기/쓰기. 컬렉션: data(분석 데이터), conversations(대화 기록)."""
+import time
 from datetime import datetime, timezone
 
+from google.api_core.exceptions import GoogleAPICallError
+
 from services.firebase import CONVERSATIONS, DATA
+
+# data 컬렉션 전체(약 800개)를 요청마다 읽으면 Firestore 무료 읽기 한도(하루 5만 건)를 금방 넘는다.
+# 서버 메모리에 캐시하고, 이 서버를 통한 쓰기는 즉시 무효화한다.
+CACHE_TTL_SECONDS = 300
+_cache = {"items": None, "at": 0.0}
+
+
+def clear_cache() -> None:
+    _cache["items"], _cache["at"] = None, 0.0
 
 
 def now() -> str:
@@ -15,13 +27,22 @@ def _data_item(doc) -> dict:
 
 
 def list_data(db) -> list[dict]:
-    items = [_data_item(d) for d in db.collection(DATA).stream()]
-    return sorted(items, key=lambda r: r["date"])
+    if _cache["items"] is not None and time.monotonic() - _cache["at"] < CACHE_TTL_SECONDS:
+        return list(_cache["items"])
+    try:
+        items = sorted((_data_item(d) for d in db.collection(DATA).stream()), key=lambda r: r["date"])
+    except GoogleAPICallError:
+        if _cache["items"] is not None:  # 한도 초과 등 일시 오류: 오래된 캐시라도 응답
+            return list(_cache["items"])
+        raise
+    _cache["items"], _cache["at"] = items, time.monotonic()
+    return list(items)
 
 
 def create_data(db, payload: dict) -> dict:
     ref = db.collection(DATA).document()
     ref.set(payload)
+    clear_cache()
     return {"id": ref.id, **payload}
 
 
@@ -30,6 +51,7 @@ def update_data(db, doc_id: str, payload: dict):
     if not ref.get().exists:
         return None
     ref.set(payload)
+    clear_cache()
     return {"id": doc_id, **payload}
 
 
@@ -38,6 +60,7 @@ def delete_data(db, doc_id: str) -> bool:
     if not ref.get().exists:
         return False
     ref.delete()
+    clear_cache()
     return True
 
 
